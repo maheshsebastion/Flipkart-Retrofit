@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/electronics"
+        android:icon="@drawable/electronics"
+        android:title="Electronics"></item>
+    <item android:id="@+id/fashion"
+        android:icon="@drawable/fashion"
+        android:title="Fashion"></item>
+    <item android:id="@+id/home"
+        android:icon="@drawable/home"
+        android:title="Home and Furniture"></item>
+    <item android:id="@+id/tv"
+        android:icon="@drawable/tv"
+        android:title="TVs &amp; Appliances"></item>
+    <item android:id="@+id/book"
+        android:icon="@drawable/book"
+        android:title="Books &amp; More"></item>
+    <item android:id="@+id/space1"
+        android:title=""></item>
+    <item android:id="@+id/offer"
+        android:icon="@drawable/offer"
+        android:title="Offer Zone"></item>
+    <item android:id="@+id/notification"
+        android:icon="@drawable/notification"
+        android:title="Notifications"></item>
+    <item android:id="@+id/space2"
+        android:title=""></item>
+    <item android:id="@+id/rewards"
+        android:icon="@drawable/reward"
+        android:title="My Rewards"></item>
+    <item android:id="@+id/cart"
+        android:icon="@drawable/cart"
+        android:title="My Cart"></item>
+    <item android:id="@+id/wishlist"
+        android:icon="@drawable/wishlist"
+        android:title="My Wishlist"></item>
+    <item android:id="@+id/orders"
+        android:icon="@drawable/order"
+        android:title="My Orders"></item>
+    <item android:id="@+id/account"
+        android:icon="@drawable/account"
+        android:title="My Account"></item>
+    <item android:id="@+id/space3"
+        android:title=""></item>
+    <item android:id="@+id/gift"
+        android:title="Gift Card"></item>
+
+</menu>
