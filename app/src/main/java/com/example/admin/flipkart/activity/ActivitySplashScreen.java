@@ -1,20 +1,22 @@
-package com.example.admin.flipkart;
+package com.example.admin.flipkart.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.admin.flipkart.R;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class SplashScreen extends AppCompatActivity {
+public class ActivitySplashScreen extends AppCompatActivity {
 
     long delay = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen);
+        setContentView(R.layout.layout_activity_splash_screen);
 
             Timer Runsplash = new Timer();
             TimerTask showSplash = new TimerTask() {
@@ -22,7 +24,7 @@ public class SplashScreen extends AppCompatActivity {
                 public void run() {
                     finish();
 
-                    Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                    Intent intent = new Intent(ActivitySplashScreen.this, ActivityMain.class);
                     startActivity(intent);
                 }
             };

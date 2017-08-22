@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.admin.flipkart.ProductDescription"
+    tools:context="com.example.admin.flipkart.activity.ActivityProducts"
     android:orientation="vertical">
 
     <include
-        layout="@layout/navigation_action"
+        layout="@layout/layout_navigation_action_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <LinearLayout

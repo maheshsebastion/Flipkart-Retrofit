@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.admin.flipkart.MainActivity"
+    tools:context="com.example.admin.flipkart.activity.ActivityMain"
     android:id="@+id/drawerLayout">
 
 
@@ -19,7 +19,7 @@
             android:orientation="vertical"
             android:background="#0066ff">
             <include
-                layout="@layout/navigation_action"
+                layout="@layout/layout_navigation_action_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -28,7 +28,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp">
+                android:paddingRight="16dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
                 <EditText
                     android:layout_width="match_parent"
@@ -444,9 +446,9 @@
     <android.support.design.widget.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:menu="@menu/navigation_menu"
+        app:menu="@menu/layout_navigation_menu"
         android:layout_gravity="start"
-        app:headerLayout="@layout/navigation_header">
+        app:headerLayout="@layout/layout_navigation_header">
 
     </android.support.design.widget.NavigationView>
 

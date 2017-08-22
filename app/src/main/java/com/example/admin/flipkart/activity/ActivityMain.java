@@ -1,34 +1,18 @@
-package com.example.admin.flipkart;
+package com.example.admin.flipkart.activity;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Rect;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.example.admin.flipkart.R;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-public class MainActivity extends AppCompatActivity {
+public class ActivityMain extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private android.support.v7.app.ActionBarDrawerToggle mToggle;
@@ -40,14 +24,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.layout_activity_main);
 
         //setting View All Button onClickListener
         viewall = (Button) findViewById(R.id.viewall);
         viewall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),ProductDescription.class);
+                Intent intent = new Intent(v.getContext(),ActivityProducts.class);
                 startActivity(intent);
             }
         });
@@ -70,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getMenuInflater().inflate(R.menu.buttons, menu);
+        getMenuInflater().inflate(R.menu.layout_menu_buttons, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
