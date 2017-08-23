@@ -1,9 +1,8 @@
-package com.example.admin.flipkart.models;
+package com.example.admin.flipkart.models.products;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.admin.flipkart.rest.Constants;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

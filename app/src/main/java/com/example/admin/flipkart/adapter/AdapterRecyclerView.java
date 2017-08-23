@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.admin.flipkart.activity.ActivityProductDescription;
 import com.example.admin.flipkart.R;
-import com.example.admin.flipkart.models.Products;
+import com.example.admin.flipkart.models.products.Products;
 
 import java.util.ArrayList;
 

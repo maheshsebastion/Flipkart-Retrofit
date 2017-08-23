@@ -12,7 +12,7 @@ import android.view.MenuItem;
 
 import com.example.admin.flipkart.adapter.AdapterRecyclerView;
 import com.example.admin.flipkart.R;
-import com.example.admin.flipkart.models.Products;
+import com.example.admin.flipkart.models.products.Products;
 import com.example.admin.flipkart.remoteAPI.APIClient;
 import com.example.admin.flipkart.remoteAPI.APIResponse;
 import com.example.admin.flipkart.remoteAPI.APIService;
@@ -23,8 +23,6 @@ import java.util.Arrays;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ActivityProducts extends AppCompatActivity {
 
@@ -52,12 +50,13 @@ public class ActivityProducts extends AppCompatActivity {
 
         //Code for Retrofit Written in APIClient
         APIService service = APIClient.getClient().create(APIService.class);
-        Call<APIResponse> call=   service.getJSON();
+        Call<APIResponse> call=   service.getProducts();
         call.enqueue(new Callback<APIResponse>() {
             @Override
             public void onResponse(Call<APIResponse> call, Response<APIResponse> response) {
 
                 APIResponse apiResponse = response.body();
+                //pList--->Product List
                 pList = new ArrayList<>(Arrays.asList(apiResponse.getProducts()));
 
                 AdapterRecyclerView recyclerAdapter = new AdapterRecyclerView(getApplicationContext(), pList);

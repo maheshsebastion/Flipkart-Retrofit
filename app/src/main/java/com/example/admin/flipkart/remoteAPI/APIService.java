@@ -10,6 +10,9 @@ import retrofit2.http.GET;
 public interface APIService {
 
     @GET("/projects/learning/laravel/e-commerce-portal/api/v1/getProducts")
-    Call<APIResponse> getJSON();
+    Call<APIResponse> getProducts();
+
+    @GET("/projects/learning/laravel/e-commerce-portal/api/v1/getSettings")
+    Call<APIResponse> getCategory();
 
 }

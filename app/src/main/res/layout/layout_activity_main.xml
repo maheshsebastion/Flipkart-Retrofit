@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.admin.flipkart.activity.ActivityMain"
-    android:id="@+id/drawerLayout">
-
+    android:id="@+id/main_drawerLayout">
 
 
     <ScrollView
@@ -100,7 +99,7 @@
                     android:textSize="15dp" />
 
                 <TextView
-                    android:id="@+id/txtView5"
+                    android:id="@+id/tv_more"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
@@ -435,14 +434,10 @@
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
-
-
-
         </LinearLayout>
 
+
     </ScrollView>
-
-
     <android.support.design.widget.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -451,5 +446,7 @@
         app:headerLayout="@layout/layout_navigation_header">
 
     </android.support.design.widget.NavigationView>
+
+
 
 </android.support.v4.widget.DrawerLayout>

@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.admin.flipkart.R;
-import com.example.admin.flipkart.models.Products;
+import com.example.admin.flipkart.models.products.Products;
 import com.thapovan.android.customui.TouchImageView;
 
 import java.util.ArrayList;

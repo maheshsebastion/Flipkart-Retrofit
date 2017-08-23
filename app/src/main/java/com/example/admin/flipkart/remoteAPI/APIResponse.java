@@ -1,6 +1,9 @@
 package com.example.admin.flipkart.remoteAPI;
 
-import com.example.admin.flipkart.models.Products;
+import android.util.Log;
+
+import com.example.admin.flipkart.models.allcategorylist.Category;
+import com.example.admin.flipkart.models.products.Products;
 
 /**
  * Created by Admin on 17-08-2017.
@@ -8,10 +11,15 @@ import com.example.admin.flipkart.models.Products;
 
 public class APIResponse {
 
-    private Products[] product;
+    private Products[] products;
+    private Category[] category;
 
     public Products[] getProducts(){
-        return product;
+        return products;
+    }
+
+    public Category[] getCategory(){
+        return category;
     }
 
 }

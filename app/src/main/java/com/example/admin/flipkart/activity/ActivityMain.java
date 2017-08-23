@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.admin.flipkart.R;
 
@@ -20,13 +21,28 @@ public class ActivityMain extends AppCompatActivity {
     private Toolbar mToolbar;
 
     Button viewall;
+    TextView more;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_activity_main);
 
-        //setting View All Button onClickListener
+        mToolbar = (Toolbar) findViewById(R.id.nav_action);
+        setSupportActionBar(mToolbar);
+
+        mDrawerLayout = (DrawerLayout)findViewById(R.id.main_drawerLayout);
+        mToggle = new android.support.v7.app.ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
+
+        mDrawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Flipkart");
+
+
+        //setting onClickListener for View All Button
         viewall = (Button) findViewById(R.id.viewall);
         viewall.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,20 +51,15 @@ public class ActivityMain extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        mToolbar = (Toolbar) findViewById(R.id.nav_action);
-        setSupportActionBar(mToolbar);
-
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawerLayout);
-        mToggle = new android.support.v7.app.ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
-
-        mDrawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
-
-
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Flipkart");
+        //setting onClickListener for TEXTVIEW more
+        more = (TextView) findViewById(R.id.tv_more);
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),ActivityAllCategories.class);
+                startActivity(intent);
+            }
+        });
 
     }
     @Override
