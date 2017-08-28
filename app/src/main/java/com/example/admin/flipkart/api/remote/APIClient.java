@@ -1,4 +1,6 @@
-package com.example.admin.flipkart.remoteAPI;
+package com.example.admin.flipkart.api.remote;
+
+import com.example.admin.flipkart.api.util.APIUtil;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -9,13 +11,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClient {
 
-    public static final String BASE_URL = "http://192.168.1.73";
     private static Retrofit retrofit = null;
 
-    public static Retrofit getClient(){
+    public static Retrofit getClient(final String baseURL){
+
         if (retrofit==null){
             retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(baseURL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

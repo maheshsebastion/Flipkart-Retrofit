@@ -1,6 +1,6 @@
 package com.example.admin.flipkart.models.allcategorylist;
 
-import com.example.admin.flipkart.rest.Constants;
+import com.example.admin.flipkart.api.util.APIUtil;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -34,10 +34,10 @@ public class Category {
     @Expose
     private Object imagePath;
 
-
-    @SerializedName("categoryChildren")
+    //public List<CategoryChild> children = null; NAME(means "children" object crreated in PARENT CLASS) SHOULD BE MATCH WITH THE CHILD(means "children" in JSON FILE) BRANCH IN JSON FILE
+    @SerializedName("children")
     @Expose
-    private List<CategoryChild> categoryChildren = null;
+    public List<CategoryChild> children = null;
 
     public Integer getId() {
         return id;
@@ -78,7 +78,7 @@ public class Category {
     //getting the Icon URL
     public String getIconUrl() {
 
-        return Constants.IMAGE_URL+this.getIconPath()+"/"+this.getIconName();
+        return APIUtil.IMAGE_URL+this.getIconPath()+"/"+this.getIconName();
     }
 
     public void setIconPath(Object iconPath) {
@@ -101,13 +101,16 @@ public class Category {
         this.imagePath = imagePath;
     }
 
-    public List<CategoryChild> getCategoryChildren() {
-        return categoryChildren;
+
+    public List<CategoryChild> getChildren() {
+
+        return children;
     }
 
-    public void setCategoryChildren(List<CategoryChild> categoryChildren) {
-        this.categoryChildren = categoryChildren;
+    public void setChildren(List<CategoryChild> children) {
+        this.children = children;
     }
+
 
 
 }

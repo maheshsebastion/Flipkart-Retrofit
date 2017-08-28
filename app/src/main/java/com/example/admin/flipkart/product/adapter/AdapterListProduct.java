@@ -1,4 +1,4 @@
-package com.example.admin.flipkart.adapter;
+package com.example.admin.flipkart.product.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.admin.flipkart.activity.ActivityProductDescription;
+import com.example.admin.flipkart.product.activity.ProductDescriptionActivity;
 import com.example.admin.flipkart.R;
 import com.example.admin.flipkart.models.products.Products;
 
@@ -21,16 +21,18 @@ import java.util.ArrayList;
  * Created by Admin on 14-08-2017.
  */
 
-public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerView.MyHolder>{
+public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.MyHolder>{
 
     private ArrayList<Products> list = new ArrayList<Products>();
     Context mContext;
 
     //Changes
-    public AdapterRecyclerView(Context mContext, ArrayList<Products> list) {
+
+    public AdapterListProduct(Context mContext, ArrayList<Products> list) {
         this.list = list;
         this.mContext = mContext;
     }
+
 
     @Override
     public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -58,7 +60,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
             public void onClick(View v) {
 
 
-                Intent intent = new Intent(v.getContext(),ActivityProductDescription.class);
+                Intent intent = new Intent(v.getContext(),ProductDescriptionActivity.class);
                 Log.i("TAG","BEFORE INTENT OF PARCELABLE");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("products",list);

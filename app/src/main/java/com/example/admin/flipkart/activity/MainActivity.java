@@ -12,8 +12,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.admin.flipkart.R;
+import com.example.admin.flipkart.product.activity.ProductActivity;
+import com.example.admin.flipkart.settings.activity.AllCategoryActivity;
 
-public class ActivityMain extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private android.support.v7.app.ActionBarDrawerToggle mToggle;
@@ -47,7 +49,7 @@ public class ActivityMain extends AppCompatActivity {
         viewall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),ActivityProducts.class);
+                Intent intent = new Intent(v.getContext(),ProductActivity.class);
                 startActivity(intent);
             }
         });
@@ -56,7 +58,7 @@ public class ActivityMain extends AppCompatActivity {
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),ActivityAllCategories.class);
+                Intent intent = new Intent(v.getContext(),AllCategoryActivity.class);
                 startActivity(intent);
             }
         });

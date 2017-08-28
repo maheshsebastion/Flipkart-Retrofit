@@ -1,4 +1,4 @@
-package com.example.admin.flipkart.activity;
+package com.example.admin.flipkart.product.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import com.thapovan.android.customui.TouchImageView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityProductDescription extends AppCompatActivity {
+public class ProductDescriptionActivity extends AppCompatActivity {
     TouchImageView productImage;
     TextView price,name,delivery;
 
@@ -74,7 +74,6 @@ public class ActivityProductDescription extends AppCompatActivity {
 
                     //getting the image from one imageview and put it on another imageview in same activity
                     productImage.setImageDrawable(imageView.getDrawable());
-                    Toast.makeText(getApplicationContext(),"THIS IS THE MESSAGE"+url,Toast.LENGTH_LONG).show();
                 }
             });
 

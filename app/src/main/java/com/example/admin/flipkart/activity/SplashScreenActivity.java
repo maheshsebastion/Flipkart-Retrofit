@@ -9,7 +9,7 @@ import com.example.admin.flipkart.R;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ActivitySplashScreen extends AppCompatActivity {
+public class SplashScreenActivity extends AppCompatActivity {
 
     long delay = 3000;
 
@@ -24,7 +24,7 @@ public class ActivitySplashScreen extends AppCompatActivity {
                 public void run() {
                     finish();
 
-                    Intent intent = new Intent(ActivitySplashScreen.this, ActivityMain.class);
+                    Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
             };
