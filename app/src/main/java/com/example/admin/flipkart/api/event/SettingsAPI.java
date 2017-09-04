@@ -13,7 +13,7 @@ import retrofit2.Response;
  * Created by Admin on 28-08-2017.
  */
 
-public class SettingsAPI extends APIAbstract{
+public class SettingsAPI extends APIAbstract {
 
     private SettingsAPI() {
         // empty method
@@ -24,12 +24,13 @@ public class SettingsAPI extends APIAbstract{
         apiInterface.getCategory().enqueue(new Callback<SettingsAPIResponse>() {
             @Override
             public void onResponse(Call<SettingsAPIResponse> call, Response<SettingsAPIResponse> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     subscriber.onSettingsCompleted(response.body());
-                }else {
+                } else {
 //                    subscriber.onProductCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
                 }
             }
+
             @Override
             public void onFailure(Call<SettingsAPIResponse> call, Throwable t) {
 //                subscriber.onSettingsCompleted(getGenericResponseErr(SettingsResponse.class, t ));
@@ -38,4 +39,22 @@ public class SettingsAPI extends APIAbstract{
 
     }
 
+    public static void getCategoryListByBrand(final SettingsEventSubscriber subscriber) {
+
+        apiInterface.getBrand().enqueue(new Callback<SettingsAPIResponse>() {
+            @Override
+            public void onResponse(Call<SettingsAPIResponse> call, Response<SettingsAPIResponse> response) {
+                if (response.isSuccessful()) {
+                    subscriber.onSettingsCompleted(response.body());
+                } else {
+//                    subscriber.onProductCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SettingsAPIResponse> call, Throwable t) {
+//                subscriber.onSettingsCompleted(getGenericResponseErr(SettingsResponse.class, t ));
+            }
+        });
+    }
 }

@@ -21,7 +21,10 @@
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".product.activity.ProductActivity" />
         <activity android:name=".product.activity.ProductDescriptionActivity" />
-        <activity android:name=".settings.activity.AllCategoryActivity"></activity>
+        <activity android:name=".category.activity.AllCategoryActivity" />
+        <activity android:name=".brand.activity.BrandActivity" />
+        <activity android:name=".activity.AllDetailsActivity" />
+        <activity android:name=".activity.AllDetailsFragment"></activity>
     </application>
 
 </manifest>

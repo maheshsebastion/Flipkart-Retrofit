@@ -3,30 +3,14 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
 
-    <string name="title">Flipkart</string>
-    <string name="Offers">Offers</string>
-    <string name="Electronics">Electronics</string>
-    <string name="Home">Home</string>
-    <string name="Book">Book</string>
-    <string name="More">More</string>
-    <string name="RedmiNote">RedmiNote</string>
-    <string name="Tab_New">Tab_New</string>
-    <string name="Deals">Deals of the Day</string>
-    <string name="ViewButton">View All</string>
-    <string name="Deals2">Deals of the Day</string>
-    <string name="ViewButton2">View All</string>
-    <string name="iphone">Apple iPhone 4s</string>
-    <string name="s1_mob1">Lenova Vibe K5</string>
-    <string name="s1_mob2">Alcatel OneTouch XL</string>
-    <string name="s1_mob3">Apple iPhone</string>
-    <string name="s1_mob4">LG V20</string>
-    <string name="s2_toptext">Mobiles</string>
-    <string name="s2_sort">Sort</string>
-    <string name="s2_filter">Filter</string>
-    <string name="Watch_text">Top Branded Watches</string>
-    <string name="Coolers_text">Rayban Glass</string>
-    <string name="Saree_text">Cotton Sarees</string>
-    <string name="Bag_text">Sling Bags</string>
-    <string name="AddToCart">Add To Cart</string>
-    <string name="BuyNow">Buy Now</string>
+    <!--below strings are written for activity of the name mentioned-->
+    <string name="brand">Brands</string>
+    <string name="category">All Categories</string>
+    <string name="product">Electronics</string>
+    <string name="main">Flipkart</string>
+
+    <!--string for load until API get connected-->
+    <string name="label_loading">Loading...</string>
+
+
 </resources>

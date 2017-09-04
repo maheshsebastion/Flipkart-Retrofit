@@ -1,4 +1,4 @@
-package com.example.admin.flipkart.settings.adapter;
+package com.example.admin.flipkart.category.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -48,8 +48,8 @@ public class AdapterAllCategory extends BaseExpandableListAdapter {
         CategoryChild child = (CategoryChild) getChild(groupPosition,childPosition);
 
         if(convertView == null){
-            LayoutInflater layoutInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.row_child_item,null);
+            LayoutInflater clayoutInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = clayoutInflater.inflate(R.layout.row_child_category,null);
         }
         TextView tv_child = (TextView) convertView.findViewById(R.id.categoryCHILD);
         tv_child.setText(child.getName());
@@ -82,8 +82,8 @@ public class AdapterAllCategory extends BaseExpandableListAdapter {
 
         Category category = (Category) getGroup(groupPosition);
         if (convertView == null ){
-            LayoutInflater layoutInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.row_group_item,null);
+            LayoutInflater clayoutInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = clayoutInflater.inflate(R.layout.row_group_category,null);
         }
 
         TextView tv_parent = (TextView) convertView.findViewById(R.id.categoryGRP);

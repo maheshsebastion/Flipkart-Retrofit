@@ -1,8 +1,9 @@
 package com.example.admin.flipkart.activity;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -10,12 +11,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.admin.flipkart.R;
+import com.example.admin.flipkart.api.util.APIUtil;
+import com.example.admin.flipkart.app.AppActivity;
+import com.example.admin.flipkart.brand.activity.BrandActivity;
+import com.example.admin.flipkart.models.products.Products;
 import com.example.admin.flipkart.product.activity.ProductActivity;
-import com.example.admin.flipkart.settings.activity.AllCategoryActivity;
+import com.example.admin.flipkart.category.activity.AllCategoryActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppActivity {
 
     private DrawerLayout mDrawerLayout;
     private android.support.v7.app.ActionBarDrawerToggle mToggle;
@@ -25,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     Button viewall;
     TextView more;
 
+    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +48,35 @@ public class MainActivity extends AppCompatActivity {
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Flipkart");
+        getSupportActionBar().setTitle(R.string.main);
 
+//providing action with on click listnener for items in navigation drawer
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent;
+                switch (item.getItemId()) {
+                    case R.id.electronics:
+                        intent = new Intent(getApplicationContext(), AllCategoryActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(getApplicationContext(), "electronics Selected", Toast.LENGTH_LONG).show();
+                        break;
+                    case R.id.brands:
+                        intent = new Intent(getApplicationContext(), BrandActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(getApplicationContext(), "brand Selected", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.fashion:
+                        Toast.makeText(getApplicationContext(), "fashion Selected", Toast.LENGTH_LONG).show();
+                        break;
+                    case R.id.home:
+                        Toast.makeText(getApplicationContext(), "home & furniture Selected", Toast.LENGTH_LONG).show();
+                        break;
+                }
+                return true;
+            }
+        });
 
         //setting onClickListener for View All Button
         viewall = (Button) findViewById(R.id.viewall);
@@ -50,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(),ProductActivity.class);
+                intent.setClass(v.getContext(),ProductActivity.class);
+                intent.putExtra(APIUtil.KEY_SOURCE,APIUtil.SOURCE_FROM_MAIN);
                 startActivity(intent);
             }
         });

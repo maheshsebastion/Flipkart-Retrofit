@@ -5,11 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.admin.flipkart.R;
+import com.example.admin.flipkart.app.AppActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class SplashScreenActivity extends AppCompatActivity {
+public class SplashScreenActivity extends AppActivity {
 
     long delay = 3000;
 

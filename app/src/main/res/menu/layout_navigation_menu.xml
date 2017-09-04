@@ -4,6 +4,9 @@
     <item android:id="@+id/electronics"
         android:icon="@drawable/electronics"
         android:title="Electronics"></item>
+    <item android:id="@+id/brands"
+        android:icon="@drawable/brand"
+        android:title="Brand"></item>
     <item android:id="@+id/fashion"
         android:icon="@drawable/fashion"
         android:title="Fashion"></item>

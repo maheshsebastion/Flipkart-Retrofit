@@ -1,25 +1,26 @@
 package com.example.admin.flipkart.product.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.admin.flipkart.activity.AllDetailsActivity;
 import com.example.admin.flipkart.R;
+import com.example.admin.flipkart.app.AppActivity;
 import com.example.admin.flipkart.models.products.Products;
 import com.thapovan.android.customui.TouchImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDescriptionActivity extends AppCompatActivity {
+public class ProductDescriptionActivity extends AppActivity {
     TouchImageView productImage;
-    TextView price,name,delivery;
+    TextView price,name,sprice,allDetails;
 
     private List<Products> pList;
     int position,gImagePos;
@@ -35,7 +36,9 @@ public class ProductDescriptionActivity extends AppCompatActivity {
         productImage = (TouchImageView) findViewById(R.id.pImage);
         price = (TextView) findViewById(R.id.pPrice);
         name = (TextView) findViewById(R.id.pName);
-        delivery = (TextView) findViewById(R.id.pDelivery);
+        sprice = (TextView) findViewById(R.id.sPrice);
+        allDetails = (TextView) findViewById(R.id.allDetails);
+//        description = (TextView) findViewById(R.id.description);
 
         //getting DATA and POSITION using Parcelable
         Log.i("TAG2","BEFORE RECIEVAL OF PARCELABLE");
@@ -81,9 +84,16 @@ public class ProductDescriptionActivity extends AppCompatActivity {
 
         price.setText(pList.get(position).getRegularPrice());
         name.setText(pList.get(position).getName());
-        delivery.setText(pList.get(position).getDeliveryDays());
+        sprice.setText(pList.get(position).getShippingPrice());
+//        description.setText(Html.fromHtml(pList.get(position).getDescription()).toString());
 
-
+        allDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),AllDetailsActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

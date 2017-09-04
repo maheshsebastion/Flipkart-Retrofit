@@ -53,7 +53,7 @@ public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.
         Glide.with(mContext)
                 .load(products.getFeaturedImages().getImageUrl())
                 .into(holder.image);
-        holder.price.setText("INR "+ products.getRegularPrice());
+        holder.price.setText(products.getRegularPrice());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
