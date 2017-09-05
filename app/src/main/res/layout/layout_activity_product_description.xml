@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -11,8 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
 
             <com.thapovan.android.customui.TouchImageView
                 android:id="@+id/pImage"
@@ -32,14 +31,17 @@
                     android:id="@+id/linear"
                     android:layout_width="70dp"
                     android:layout_height="80dp"
-                    android:orientation="horizontal"></LinearLayout>
+                    android:orientation="horizontal">
+
+                </LinearLayout>
 
             </HorizontalScrollView>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="16dp">
 
                 <TextView
                     android:id="@+id/pName"
@@ -75,26 +77,42 @@
                         android:textSize="15dp" />
 
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="5dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="9">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="\u20B9 "
-                        android:textSize="20dp"
+                        android:textSize="25dp"
                         android:textColor="@color/black"
                         />
                     <TextView
                         android:id="@+id/pPrice"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
                         android:text="Price"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="25dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="24% off"
+                        android:textSize="18dp"
+                        android:gravity="bottom"
+                        android:textColor="@color/green"
+                        android:layout_weight="1"/>
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/assured"
+                        android:layout_weight="1"
+                        android:layout_gravity="bottom"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -108,7 +126,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="7dp"
                         android:text="Shipping Price : "
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="15dp" />
 
                     <TextView
@@ -116,38 +134,48 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="7dp"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Speification : "
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/specification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:textSize="15dp" />
                 </LinearLayout>
             </LinearLayout>
-            <!-- <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="vertical">
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:text="Description : "
-                       android:textSize="18dp"
-                       android:textColor="@color/black"/>
-                   <TextView
-                       android:id="@+id/description"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:textSize="15dp"
-                       android:textColor="@color/black"/>
-               </LinearLayout>-->
-            <TextView
-                android:id="@+id/allDetails"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="All Details"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:background="@color/whitebackground"
-                android:gravity="center_vertical"
-                android:paddingLeft="5dp"
-                android:drawableRight="@drawable/next" />
+                android:layout_height="wrap_content"
+                android:background="@color/whitebackground">
+                <TextView
+                    android:id="@+id/allDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="All Details"
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_margin="3dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:drawableRight="@drawable/next" />
+            </LinearLayout>
         </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>

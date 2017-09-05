@@ -19,7 +19,7 @@ public class ProductAPI extends APIAbstract{
         // empty method
     }
 
-    public static void get(final ProductEventSubscriber subscriber) {
+    public static void getProducts(final ProductEventSubscriber subscriber) {
 
         apiInterface.getProducts().enqueue(new Callback<ProductAPIResponse>() {
             @Override

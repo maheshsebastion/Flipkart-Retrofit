@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.admin.flipkart.api.util.APIUtil;
 import com.example.admin.flipkart.product.activity.ProductDescriptionActivity;
 import com.example.admin.flipkart.R;
 import com.example.admin.flipkart.models.products.Products;
@@ -61,12 +62,10 @@ public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.
 
 
                 Intent intent = new Intent(v.getContext(),ProductDescriptionActivity.class);
-                Log.i("TAG","BEFORE INTENT OF PARCELABLE");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("products",list);
-                intent.putExtra("position",position);
+                intent.putExtra(APIUtil.KEY_PRODUCTS,list);
+                intent.putExtra(APIUtil.KEY_POSITION,position);
                 v.getContext().startActivity(intent);
-                Log.i("TAG1","AFTER INTENT OF PARCELABLE");
 
 
             }

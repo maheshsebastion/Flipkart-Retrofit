@@ -48,7 +48,7 @@
                 android:layout_toRightOf="@+id/imgView2"
                 android:gravity="center"
                 android:text="Sort"
-                android:textColor="#000"
+                android:textColor="@color/black"
                 android:textSize="22sp" />
         </RelativeLayout>
 
@@ -74,7 +74,7 @@
                 android:layout_toRightOf="@+id/imgView3"
                 android:gravity="center"
                 android:text="Filter"
-                android:textColor="#000"
+                android:textColor="@color/black"
                 android:textSize="22sp" />
         </RelativeLayout>
 

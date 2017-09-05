@@ -2,7 +2,6 @@ package com.example.admin.flipkart.category.activity;
 
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -12,6 +11,7 @@ import android.widget.ExpandableListView;
 
 import com.example.admin.flipkart.R;
 import com.example.admin.flipkart.api.util.APIUtil;
+import com.example.admin.flipkart.api.util.CommunicationManager;
 import com.example.admin.flipkart.app.AppActivity;
 import com.example.admin.flipkart.category.adapter.AdapterAllCategory;
 import com.example.admin.flipkart.api.event.SettingsAPI;
@@ -24,6 +24,8 @@ import java.util.ArrayList;
 
 public class AllCategoryActivity extends AppActivity implements SettingsEventSubscriber {
 
+    AllCategoryActivity mActivity;
+
     private DrawerLayout mDrawerLayout;
     private android.support.v7.app.ActionBarDrawerToggle mToggle;
 
@@ -35,6 +37,9 @@ public class AllCategoryActivity extends AppActivity implements SettingsEventSub
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        mActivity = this;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_activity_all_category);
 
@@ -54,7 +59,7 @@ public class AllCategoryActivity extends AppActivity implements SettingsEventSub
         //Retrofit used in subscriber (Implement the appropriate event subscriber and implement the methods) the methods are given below as public void onSettingsCompleted(SettingsAPIResponse settingsAPIResponse)
         //write the appropriate code inside it
         showProgress();
-        SettingsAPI.get(this);
+        CommunicationManager.getInstance().getCategories(mActivity);
 
         expandableListView = (ExpandableListView) findViewById(R.id.categoryELV);
 

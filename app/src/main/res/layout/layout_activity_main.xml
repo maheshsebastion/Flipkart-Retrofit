@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#0066ff">
+            android:background="@color/appbackground">
             <include
                 layout="@layout/layout_navigation_action_bar" />
 
@@ -32,12 +32,12 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:background="@android:color/white"
+                    android:background="@color/white"
                     android:drawableLeft="@drawable/search"
                     android:layout_gravity="center"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:hint="Search for Products,Brands and More"
+                    android:hint="@string/searchmain"
                     android:textSize="17dp" />
 
             </LinearLayout>
@@ -54,13 +54,13 @@
                     android:id="@+id/txtView1"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:drawableTop="@drawable/offer"
                     android:layout_gravity="center_horizontal"
-                    android:text="Offer"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/offer"
+                    android:text="@string/offer"
                     android:textAlignment="center"
-                    android:textColor="#FFF"
-                    android:textSize="15dp"
-                    android:layout_weight="1"/>
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/txtView2"
@@ -68,9 +68,9 @@
                     android:layout_height="50dp"
                     android:drawableTop="@drawable/electronics"
                     android:layout_gravity="center_horizontal"
-                    android:text="Electronics"
+                    android:text="@string/electronic"
                     android:textAlignment="center"
-                    android:textColor="#FFF"
+                    android:textColor="@color/white"
                     android:textSize="15dp"
                     android:layout_weight="1"/>
 
@@ -80,9 +80,9 @@
                     android:layout_height="50dp"
                     android:drawableTop="@drawable/fashion"
                     android:layout_gravity="center_horizontal"
-                    android:text="Fashion"
+                    android:text="@string/fashion"
                     android:textAlignment="center"
-                    android:textColor="#FFF"
+                    android:textColor="@color/white"
                     android:textSize="15dp"
                     android:layout_weight="1"/>
 
@@ -92,9 +92,9 @@
                     android:layout_height="50dp"
                     android:drawableTop="@drawable/home"
                     android:layout_gravity="center_horizontal"
-                    android:text="Home"
+                    android:text="@string/home"
                     android:textAlignment="center"
-                    android:textColor="#FFF"
+                    android:textColor="@color/white"
                     android:textSize="15dp"
                     android:layout_weight="1"/>
 
@@ -104,9 +104,9 @@
                     android:layout_height="50dp"
                     android:drawableTop="@drawable/more"
                     android:layout_gravity="center_horizontal"
-                    android:text="More"
+                    android:text="@string/more"
                     android:textAlignment="center"
-                    android:textColor="#FFF"
+                    android:textColor="@color/white"
                     android:textSize="15dp"
                     android:layout_weight="1"/>
 
@@ -199,7 +199,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="MOTO S4"
+                                android:text="@string/motoad"
                                 android:textStyle="bold"
                                 android:textSize="18sp"
                                 android:layout_alignParentBottom="true"
@@ -231,7 +231,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="LENOVO VIBE K5"
+                                android:text="@string/lenovoad"
                                 android:textStyle="bold"
                                 android:textSize="18sp"
                                 android:layout_alignParentBottom="true"
@@ -261,8 +261,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Deals of the Day"
-                        android:textColor="#FFF"
+                        android:text="@string/deals_of_day"
+                        android:textColor="@color/white"
                         android:textSize="25dp"
                         android:paddingLeft="20dp"
                         android:id="@+id/deals"
@@ -277,8 +277,8 @@
                         android:gravity="center"
                         android:paddingBottom="20dp"
                         android:paddingLeft="15dp"
-                        android:text="01h 42m remaining"
-                        android:textColor="#7ca7ef" />
+                        android:text="@string/time"
+                        android:textColor="@color/lightblue" />
                 </RelativeLayout>
 
                 <LinearLayout
@@ -293,7 +293,8 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginLeft="30dp"
                         android:layout_gravity="center"
-                        android:text="View all"
+                        android:text="@string/viewall"
+                        android:textAllCaps="false"
                         android:textSize="17dp"
                         android:textStyle="bold" />
                 </LinearLayout>

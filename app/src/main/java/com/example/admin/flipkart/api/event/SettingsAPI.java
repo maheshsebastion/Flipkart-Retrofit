@@ -19,7 +19,7 @@ public class SettingsAPI extends APIAbstract {
         // empty method
     }
 
-    public static void get(final SettingsEventSubscriber subscriber) {
+    public static void getCategories(final SettingsEventSubscriber subscriber) {
 
         apiInterface.getCategory().enqueue(new Callback<SettingsAPIResponse>() {
             @Override

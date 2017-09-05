@@ -1,6 +1,5 @@
 package com.example.admin.flipkart.product.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,10 +9,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.admin.flipkart.api.util.CommunicationManager;
 import com.example.admin.flipkart.app.AppActivity;
 import com.example.admin.flipkart.product.adapter.AdapterListProduct;
 import com.example.admin.flipkart.R;
-import com.example.admin.flipkart.api.event.ProductAPI;
 import com.example.admin.flipkart.api.subscriber.ProductEventSubscriber;
 import com.example.admin.flipkart.api.util.APIUtil;
 import com.example.admin.flipkart.models.products.Products;
@@ -23,6 +22,8 @@ import java.util.ArrayList;
 
 public class ProductActivity extends AppActivity implements ProductEventSubscriber {
 
+    ProductActivity mActivity;
+
     private Toolbar mToolbar;
 
     RecyclerView recyclerView;
@@ -30,6 +31,9 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        mActivity = this;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_activity_products);
 
@@ -51,7 +55,7 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
         if(KEY_SOURCE.equals(APIUtil.SOURCE_FROM_MAIN)){
 
             showProgress();
-            ProductAPI.get(this);
+            CommunicationManager.getInstance().getProducts(mActivity);
         }
         else if (KEY_SOURCE.equals(APIUtil.SOURCE_FROM_AllCATEGORY)){
 
@@ -59,7 +63,7 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
             String categoryName = getIntent().getStringExtra(APIUtil.STORED_ITEMS);
             getSupportActionBar().setTitle(categoryName);
             showProgress();
-            ProductAPI.getProductCategory(categoryId,this);
+            CommunicationManager.getInstance().getProductCategory(mActivity,categoryId);
         }
         else if (KEY_SOURCE.equals(APIUtil.SOURCE_FROM_BRAND)){
 
@@ -67,7 +71,7 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
             String brandName = getIntent().getStringExtra(APIUtil.STORED_ITEMS);
             getSupportActionBar().setTitle(brandName);
             showProgress();
-            ProductAPI.getProductBrand(brandId,this);
+            CommunicationManager.getInstance().getProductBrand(mActivity,brandId);
         }
         recyclerView = (RecyclerView) findViewById(R.id.recycle);
     }

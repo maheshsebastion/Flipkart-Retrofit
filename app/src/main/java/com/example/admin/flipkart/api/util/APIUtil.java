@@ -10,6 +10,7 @@ import com.example.admin.flipkart.api.remote.APIInterface;
 public class APIUtil {
 
     public static final String KEY_POSITION = "position";
+    public static final String KEY_PRODUCTS = "products";
     public static final String STORED_ITEMS = "list of items";
     public static final String KEY_SOURCE = "source";
     public static final String SOURCE_FROM_BRAND = "from BrandActivity";

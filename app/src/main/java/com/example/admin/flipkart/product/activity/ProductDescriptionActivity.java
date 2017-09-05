@@ -2,6 +2,8 @@ package com.example.admin.flipkart.product.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,8 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.admin.flipkart.activity.AllDetailsActivity;
 import com.example.admin.flipkart.R;
+import com.example.admin.flipkart.activity.AllDetailsActivity;
+import com.example.admin.flipkart.api.util.APIUtil;
 import com.example.admin.flipkart.app.AppActivity;
 import com.example.admin.flipkart.models.products.Products;
 import com.thapovan.android.customui.TouchImageView;
@@ -20,7 +23,7 @@ import java.util.List;
 
 public class ProductDescriptionActivity extends AppActivity {
     TouchImageView productImage;
-    TextView price,name,sprice,allDetails;
+    TextView price,name,sprice,allDetails,specification;
 
     private List<Products> pList;
     int position,gImagePos;
@@ -38,14 +41,14 @@ public class ProductDescriptionActivity extends AppActivity {
         name = (TextView) findViewById(R.id.pName);
         sprice = (TextView) findViewById(R.id.sPrice);
         allDetails = (TextView) findViewById(R.id.allDetails);
-//        description = (TextView) findViewById(R.id.description);
+        specification = (TextView) findViewById(R.id.specification);
 
         //getting DATA and POSITION using Parcelable
-        Log.i("TAG2","BEFORE RECIEVAL OF PARCELABLE");
-        pList = (ArrayList) getIntent().getParcelableArrayListExtra("products");
-        position = getIntent().getIntExtra("position",00);
 
-//        gImagePos = pList.get(position).getGalleryImages();
+        pList = (ArrayList) getIntent().getParcelableArrayListExtra(APIUtil.KEY_PRODUCTS);
+        position = getIntent().getIntExtra(APIUtil.KEY_POSITION,00);
+
+//        gImagePos = pList.getProducts(position).getGalleryImages();
 
         //getting Featured Images from Products model and put it on glide
         Glide.with(this)
@@ -85,12 +88,14 @@ public class ProductDescriptionActivity extends AppActivity {
         price.setText(pList.get(position).getRegularPrice());
         name.setText(pList.get(position).getName());
         sprice.setText(pList.get(position).getShippingPrice());
-//        description.setText(Html.fromHtml(pList.get(position).getDescription()).toString());
+        specification.setText(Html.fromHtml(pList.get(position).getSpec()).toString());
 
         allDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(),AllDetailsActivity.class);
+                intent.putExtra(APIUtil.KEY_POSITION,position);
+                intent.putParcelableArrayListExtra(APIUtil.KEY_PRODUCTS, (ArrayList<? extends Parcelable>) pList);
                 startActivity(intent);
             }
         });

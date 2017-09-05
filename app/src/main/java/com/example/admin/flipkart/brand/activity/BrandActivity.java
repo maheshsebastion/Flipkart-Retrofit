@@ -14,6 +14,7 @@ import com.example.admin.flipkart.api.event.SettingsAPI;
 import com.example.admin.flipkart.api.response.SettingsAPIResponse;
 import com.example.admin.flipkart.api.subscriber.SettingsEventSubscriber;
 import com.example.admin.flipkart.api.util.APIUtil;
+import com.example.admin.flipkart.api.util.CommunicationManager;
 import com.example.admin.flipkart.app.AppActivity;
 import com.example.admin.flipkart.brand.adapter.AdapterBrand;
 import com.example.admin.flipkart.models.brand.Brand;
@@ -23,14 +24,18 @@ import java.util.ArrayList;
 
 public class BrandActivity extends AppActivity implements SettingsEventSubscriber {
 
+    BrandActivity mActivity;
+
     Toolbar toolbar;
     ListView blistView;
     ArrayList<Brand> brandArrayList = new ArrayList<>();
     AdapterBrand adapterBrand;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        mActivity = this;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_activity_brand);
 
@@ -46,8 +51,7 @@ public class BrandActivity extends AppActivity implements SettingsEventSubscribe
         }
 
         showProgress();
-        SettingsAPI.getCategoryListByBrand(this);
-
+        CommunicationManager.getInstance().getCategoryListByBrand(mActivity);
         blistView = (ListView) findViewById(R.id.brandLV);
     }
 

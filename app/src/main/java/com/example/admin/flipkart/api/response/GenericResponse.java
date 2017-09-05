@@ -50,9 +50,9 @@ public class GenericResponse {
     }
 
     public String getErrorMsg(){
-       /* if(AppUtil.isListNotEmpty(parameters) && parameters.get(0) != null
-                && TextUtil.isValidString(parameters.get(0).getMessage())){
-            return parameters.get(0).getMessage();
+       /* if(AppUtil.isListNotEmpty(parameters) && parameters.getProducts(0) != null
+                && TextUtil.isValidString(parameters.getProducts(0).getMessage())){
+            return parameters.getProducts(0).getMessage();
         }*/
         if(TextUtil.isValidString(error)){
             return error;

@@ -5,5 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="black">#353434</color>
     <color name="green">#FF06BE25</color>
-    <color name="whitebackground">#f2eee3</color>
+    <color name="whitebackground">#e2e2e1</color>
+    <color name="appbackground">#0066ff</color>
+    <color name="lightblue">#7ca7ef</color>
 </resources>
