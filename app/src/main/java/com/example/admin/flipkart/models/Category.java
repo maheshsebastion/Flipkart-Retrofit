@@ -1,4 +1,4 @@
-package com.example.admin.flipkart.models.allcategorylist;
+package com.example.admin.flipkart.models;
 
 import com.example.admin.flipkart.api.util.APIUtil;
 import com.google.gson.annotations.Expose;

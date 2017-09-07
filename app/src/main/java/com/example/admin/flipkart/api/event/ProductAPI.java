@@ -27,7 +27,7 @@ public class ProductAPI extends APIAbstract{
                 if(response.isSuccessful()) {
                     subscriber.onProductCompleted(response.body());
                 }else {
-//                    subscriber.onProductCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
+//                    subscriber.onLoginCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
                 }
             }
             @Override
@@ -45,7 +45,7 @@ public class ProductAPI extends APIAbstract{
                 if(response.isSuccessful()) {
                     subscriber.onProductCompleted(response.body());
                 }else {
-//                    subscriber.onProductCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
+//                    subscriber.onLoginCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
                 }
             }
             @Override
@@ -63,7 +63,7 @@ public class ProductAPI extends APIAbstract{
                 if(response.isSuccessful()) {
                     subscriber.onProductCompleted(response.body());
                 }else {
-//                    subscriber.onProductCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
+//                    subscriber.onLoginCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
                 }
             }
             @Override

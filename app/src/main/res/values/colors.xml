@@ -8,4 +8,6 @@
     <color name="whitebackground">#e2e2e1</color>
     <color name="appbackground">#0066ff</color>
     <color name="lightblue">#7ca7ef</color>
+    <color name="blue">#84c4f9</color>
+    <color name="yellow">#efd45b</color>
 </resources>

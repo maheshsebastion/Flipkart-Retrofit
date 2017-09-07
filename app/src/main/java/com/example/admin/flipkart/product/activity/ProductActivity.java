@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.admin.flipkart.api.util.CommunicationManager;
 import com.example.admin.flipkart.app.AppActivity;
@@ -15,8 +14,9 @@ import com.example.admin.flipkart.product.adapter.AdapterListProduct;
 import com.example.admin.flipkart.R;
 import com.example.admin.flipkart.api.subscriber.ProductEventSubscriber;
 import com.example.admin.flipkart.api.util.APIUtil;
-import com.example.admin.flipkart.models.products.Products;
+import com.example.admin.flipkart.models.Products;
 import com.example.admin.flipkart.api.response.ProductAPIResponse;
+import com.thapovan.android.commonutils.toast.ToastUtil;
 
 import java.util.ArrayList;
 
@@ -47,7 +47,7 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
             getSupportActionBar().setDisplayShowTitleEnabled(true);
         }
 
-        //Retrofit used in subscriber (Implement the appropriate event subscriber and implent the methods) the methods are given below as public void onProductCompleted(ProductAPIResponse productAPIResponse)
+        //Retrofit used in subscriber (Implement the appropriate event subscriber and implent the methods) the methods are given below as public void onLoginCompleted(ProductAPIResponse productAPIResponse)
         //write the appropriate code inside it
 
         String KEY_SOURCE = getIntent().getExtras().getString(APIUtil.KEY_SOURCE);
@@ -103,7 +103,9 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
             recyclerView.setAdapter(recyclerAdapter);
         }
         else {
-            Toast.makeText(getApplicationContext(), productAPIResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            ToastUtil.showCenterToast(getApplicationContext(), productAPIResponse.getMessage());
+//            DialogUtil.showAlert();
+//            Toast.makeText(getApplicationContext(), productAPIResponse.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
     }

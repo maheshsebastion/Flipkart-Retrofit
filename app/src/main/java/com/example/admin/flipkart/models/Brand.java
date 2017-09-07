@@ -1,4 +1,4 @@
-package com.example.admin.flipkart.models.brand;
+package com.example.admin.flipkart.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

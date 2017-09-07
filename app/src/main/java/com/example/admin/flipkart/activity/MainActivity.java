@@ -11,15 +11,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.admin.flipkart.R;
 import com.example.admin.flipkart.api.util.APIUtil;
 import com.example.admin.flipkart.app.AppActivity;
 import com.example.admin.flipkart.brand.activity.BrandActivity;
-import com.example.admin.flipkart.models.products.Products;
+import com.example.admin.flipkart.login.LoginActivity;
 import com.example.admin.flipkart.product.activity.ProductActivity;
 import com.example.admin.flipkart.category.activity.AllCategoryActivity;
+import com.thapovan.android.commonutils.toast.ToastUtil;
 
 public class MainActivity extends AppActivity {
 
@@ -28,7 +28,7 @@ public class MainActivity extends AppActivity {
 
     private Toolbar mToolbar;
 
-    Button viewall;
+    Button viewall,btnLogin;
     TextView more;
 
     NavigationView navigationView;
@@ -60,18 +60,18 @@ public class MainActivity extends AppActivity {
                     case R.id.electronics:
                         intent = new Intent(getApplicationContext(), AllCategoryActivity.class);
                         startActivity(intent);
-                        Toast.makeText(getApplicationContext(), "electronics Selected", Toast.LENGTH_LONG).show();
+                        ToastUtil.showToast(getApplicationContext(), "electronics Selected");
                         break;
                     case R.id.brands:
                         intent = new Intent(getApplicationContext(), BrandActivity.class);
                         startActivity(intent);
-                        Toast.makeText(getApplicationContext(), "brand Selected", Toast.LENGTH_SHORT).show();
+                        ToastUtil.showToast(getApplicationContext(), "brand Selected");
                         break;
                     case R.id.fashion:
-                        Toast.makeText(getApplicationContext(), "fashion Selected", Toast.LENGTH_LONG).show();
+                        ToastUtil.showToast(getApplicationContext(), "fashion Selected");
                         break;
                     case R.id.home:
-                        Toast.makeText(getApplicationContext(), "home & furniture Selected", Toast.LENGTH_LONG).show();
+                        ToastUtil.showToast(getApplicationContext(), "home & furniture Selected");
                         break;
                 }
                 return true;
@@ -89,6 +89,18 @@ public class MainActivity extends AppActivity {
                 startActivity(intent);
             }
         });
+
+        //setting onClickListener for Login Button
+        btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         //setting onClickListener for TEXTVIEW more
         more = (TextView) findViewById(R.id.tv_more);
         more.setOnClickListener(new View.OnClickListener() {

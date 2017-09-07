@@ -1,4 +1,4 @@
-package com.example.admin.flipkart.models.products;
+package com.example.admin.flipkart.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

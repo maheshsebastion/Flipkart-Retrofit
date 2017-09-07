@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.admin.flipkart.R;
-import com.example.admin.flipkart.models.brand.Brand;
+import com.example.admin.flipkart.models.Brand;
 
 import java.util.ArrayList;
 

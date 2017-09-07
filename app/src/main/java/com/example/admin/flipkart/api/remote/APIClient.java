@@ -1,27 +1,41 @@
 package com.example.admin.flipkart.api.remote;
 
-import com.example.admin.flipkart.api.util.APIUtil;
+import com.example.admin.flipkart.BuildConfig;
 
+import java.util.concurrent.TimeUnit;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-/**
- * Created by Admin on 22-08-2017.
- */
 
 public class APIClient {
 
     private static Retrofit retrofit = null;
 
-    public static Retrofit getClient(final String baseURL){
+    public static Retrofit getClient(final String baseUrl) {
 
-        if (retrofit==null){
+        if (retrofit == null) {
+
+            OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
+                    .connectTimeout(30, TimeUnit.SECONDS)
+                    .writeTimeout(30, TimeUnit.SECONDS)
+                    .readTimeout(30, TimeUnit.SECONDS);
+
+            if (BuildConfig.DEBUG) {
+
+                APILogger logger  = new APILogger();
+                logger.setLevel(HttpLoggingInterceptor.Level.BODY);
+                httpClient.addInterceptor(logger);
+
+            }
+
+            OkHttpClient client = httpClient.build();
             retrofit = new Retrofit.Builder()
-                    .baseUrl(baseURL)
+                    .baseUrl(baseUrl)
                     .addConverterFactory(GsonConverterFactory.create())
+                    .client(client)
                     .build();
         }
         return retrofit;
     }
-
 }

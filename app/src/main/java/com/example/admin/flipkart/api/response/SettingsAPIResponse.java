@@ -1,11 +1,9 @@
 package com.example.admin.flipkart.api.response;
 
-import com.example.admin.flipkart.models.allcategorylist.Category;
-import com.example.admin.flipkart.models.brand.Brand;
-import com.google.gson.annotations.SerializedName;
+import com.example.admin.flipkart.models.Category;
+import com.example.admin.flipkart.models.Brand;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Admin on 24-08-2017.

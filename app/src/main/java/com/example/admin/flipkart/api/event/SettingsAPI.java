@@ -27,7 +27,7 @@ public class SettingsAPI extends APIAbstract {
                 if (response.isSuccessful()) {
                     subscriber.onSettingsCompleted(response.body());
                 } else {
-//                    subscriber.onProductCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
+//                    subscriber.onLoginCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
                 }
             }
 
@@ -47,7 +47,7 @@ public class SettingsAPI extends APIAbstract {
                 if (response.isSuccessful()) {
                     subscriber.onSettingsCompleted(response.body());
                 } else {
-//                    subscriber.onProductCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
+//                    subscriber.onLoginCompleted(processUnSuccessResponce(response.code(), response.errorBody(), SettingsResponse.class));
                 }
             }
 

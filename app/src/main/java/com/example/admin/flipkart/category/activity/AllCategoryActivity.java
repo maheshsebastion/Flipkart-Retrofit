@@ -14,9 +14,8 @@ import com.example.admin.flipkart.api.util.APIUtil;
 import com.example.admin.flipkart.api.util.CommunicationManager;
 import com.example.admin.flipkart.app.AppActivity;
 import com.example.admin.flipkart.category.adapter.AdapterAllCategory;
-import com.example.admin.flipkart.api.event.SettingsAPI;
 import com.example.admin.flipkart.api.subscriber.SettingsEventSubscriber;
-import com.example.admin.flipkart.models.allcategorylist.Category;
+import com.example.admin.flipkart.models.Category;
 import com.example.admin.flipkart.api.response.SettingsAPIResponse;
 import com.example.admin.flipkart.product.activity.ProductActivity;
 

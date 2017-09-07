@@ -284,7 +284,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:weightSum="2">
 
                     <Button
                         android:id="@+id/viewall"
@@ -292,11 +294,22 @@
                         android:layout_height="40dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginLeft="30dp"
-                        android:layout_gravity="center"
                         android:text="@string/viewall"
                         android:textAllCaps="false"
                         android:textSize="17dp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
+                    <Button
+                        android:id="@+id/btnLogin"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="30dp"
+                        android:text="@string/action_sign_in"
+                        android:textAllCaps="false"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
                 </LinearLayout>
             </LinearLayout>
 

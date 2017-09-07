@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.admin.flipkart.R;
-import com.example.admin.flipkart.models.allcategorylist.Category;
-import com.example.admin.flipkart.models.allcategorylist.CategoryChild;
+import com.example.admin.flipkart.models.Category;
+import com.example.admin.flipkart.models.CategoryChild;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,8 +88,15 @@ public class AdapterAllCategory extends BaseExpandableListAdapter {
             convertView = clayoutInflater.inflate(R.layout.row_group_category,null);
         }
 
-        TextView tv_parent = (TextView) convertView.findViewById(R.id.categoryGRP);
-        tv_parent.setText(category.getName());
+        TextView tvParent = (TextView) convertView.findViewById(R.id.categoryGRP);
+        tvParent.setText(category.getName());
+
+        ImageView ivCategoryIcon = (ImageView) convertView.findViewById(R.id.categoryIcon);
+
+        String iURL = category.getIconUrl();
+        Glide.with(mContext)
+                .load(iURL)
+                .into(ivCategoryIcon);
 
         return convertView;
     }

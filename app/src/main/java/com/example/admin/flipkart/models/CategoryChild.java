@@ -1,4 +1,4 @@
-package com.example.admin.flipkart.models.allcategorylist;
+package com.example.admin.flipkart.models;
 
 import android.util.Log;
 

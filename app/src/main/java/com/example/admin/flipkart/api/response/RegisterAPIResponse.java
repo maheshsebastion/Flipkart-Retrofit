@@ -1,32 +1,18 @@
 package com.example.admin.flipkart.api.response;
 
-import com.example.admin.flipkart.models.Products;
+import com.example.admin.flipkart.models.User;
 
 import java.util.ArrayList;
 
 /**
- * Created by Admin on 24-08-2017.
+ * Created by Admin on 05-09-2017.
  */
 
-public class ProductAPIResponse {
-
-    private ArrayList<Products> products;
-    /**
-     * success : true
-     * message : Product List
-     */
+public class RegisterAPIResponse {
 
     private boolean success;
     private String message;
-
-
-    public ArrayList<Products> getProducts(){
-        return products;
-    }
-
-    public void setProducts(ArrayList<Products> products) {
-        this.products = products;
-    }
+    private User user;
 
     public boolean isSuccess() {
         return success;
@@ -43,4 +29,13 @@ public class ProductAPIResponse {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

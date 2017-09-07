@@ -80,16 +80,6 @@
                         android:textColor="@color/black"
 
                         />
-
-                    <TextView
-                        android:id="@+id/color"
-                        android:textSize="13dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="RED"
-                        android:layout_marginTop="7dp"
-                        android:textColor="@color/black"
-                        />
                 </LinearLayout>
 
 

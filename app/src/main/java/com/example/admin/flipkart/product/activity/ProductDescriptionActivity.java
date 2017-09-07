@@ -1,10 +1,7 @@
 package com.example.admin.flipkart.product.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,10 +9,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.admin.flipkart.R;
-import com.example.admin.flipkart.activity.AllDetailsActivity;
 import com.example.admin.flipkart.api.util.APIUtil;
 import com.example.admin.flipkart.app.AppActivity;
-import com.example.admin.flipkart.models.products.Products;
+import com.example.admin.flipkart.models.Products;
 import com.thapovan.android.customui.TouchImageView;
 
 import java.util.ArrayList;
@@ -26,10 +22,7 @@ public class ProductDescriptionActivity extends AppActivity {
     TextView price,name,sprice,allDetails,specification;
 
     private List<Products> pList;
-    int position,gImagePos;
-
-    String imageURL;
-    String iPath,iName;
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +41,6 @@ public class ProductDescriptionActivity extends AppActivity {
         pList = (ArrayList) getIntent().getParcelableArrayListExtra(APIUtil.KEY_PRODUCTS);
         position = getIntent().getIntExtra(APIUtil.KEY_POSITION,00);
 
-//        gImagePos = pList.getProducts(position).getGalleryImages();
-
         //getting Featured Images from Products model and put it on glide
         Glide.with(this)
                 .load(pList.get(position).getFeaturedImages().getImageUrl())
@@ -67,7 +58,8 @@ public class ProductDescriptionActivity extends AppActivity {
 
             final ImageView imageView = new ImageView(this);
             imageView.setId(i);
-            imageView.setLayoutParams(new LinearLayout.LayoutParams(250, 200));
+            imageView.setPadding(10,0,10,0);
+            imageView.setLayoutParams(new LinearLayout.LayoutParams(200, 200));
 
             Glide.with(this)
                     .load(url)
@@ -90,15 +82,6 @@ public class ProductDescriptionActivity extends AppActivity {
         sprice.setText(pList.get(position).getShippingPrice());
         specification.setText(Html.fromHtml(pList.get(position).getSpec()).toString());
 
-        allDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),AllDetailsActivity.class);
-                intent.putExtra(APIUtil.KEY_POSITION,position);
-                intent.putParcelableArrayListExtra(APIUtil.KEY_PRODUCTS, (ArrayList<? extends Parcelable>) pList);
-                startActivity(intent);
-            }
-        });
 
     }
 

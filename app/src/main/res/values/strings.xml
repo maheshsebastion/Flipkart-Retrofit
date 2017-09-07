@@ -25,7 +25,18 @@
     <string name="deals_of_day">Deals of the Day</string>
     <string name="time">01h 42m remaining</string>
     <string name="viewall">View All</string>
+    <string name="title_activity_login">Sign in</string>
 
-
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Login</string>
+    <string name="register">Register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_email_mismatch">Please enter correct email</string>
+    <string name="error_password_size">Password size must be 6 and above</string>
+    <string name="error_password_mismatch">Confirm password doesnot match</string>
+    <string name="error_phone_size">Phone number must be 10 digits</string>
 
 </resources>
