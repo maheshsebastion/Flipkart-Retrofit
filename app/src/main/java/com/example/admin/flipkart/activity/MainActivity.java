@@ -17,9 +17,12 @@ import com.example.admin.flipkart.api.util.APIUtil;
 import com.example.admin.flipkart.app.AppActivity;
 import com.example.admin.flipkart.brand.activity.BrandActivity;
 import com.example.admin.flipkart.login.LoginActivity;
+import com.example.admin.flipkart.login.SessionManager;
 import com.example.admin.flipkart.product.activity.ProductActivity;
 import com.example.admin.flipkart.category.activity.AllCategoryActivity;
 import com.thapovan.android.commonutils.toast.ToastUtil;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppActivity {
 
@@ -32,10 +35,15 @@ public class MainActivity extends AppActivity {
     TextView more;
 
     NavigationView navigationView;
+
+    SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_activity_main);
+
+        sessionManager = new SessionManager(getApplicationContext());
 
         mToolbar = (Toolbar) findViewById(R.id.nav_action);
         setSupportActionBar(mToolbar);
@@ -90,16 +98,7 @@ public class MainActivity extends AppActivity {
             }
         });
 
-        //setting onClickListener for Login Button
-        btnLogin = (Button) findViewById(R.id.btnLogin);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+
 
         //setting onClickListener for TEXTVIEW more
         more = (TextView) findViewById(R.id.tv_more);
@@ -111,6 +110,42 @@ public class MainActivity extends AppActivity {
             }
         });
 
+    //***************************************SESSION CODE*******************************************
+
+        HashMap<String,String> user = sessionManager.getUserDetails();
+
+        String name = user.get(sessionManager.KEY_NAME);
+        String email = user.get(sessionManager.KEY_EMAIL);
+
+        btnLogin = (Button) findViewById(R.id.btnLogin);
+
+        if (sessionManager.isLoggedIn() == false){
+            ToastUtil.showCenterToast(getApplicationContext(),"Please Login to your account....");
+            btnLogin.setText("Login");
+        }else {
+            ToastUtil.showCenterToast(getApplicationContext(),"Your Name is : "+name);
+            ToastUtil.showCenterToast(getApplicationContext(),"Your Email is : "+email);
+            btnLogin.setText("Logout");
+        }
+
+        //setting onClickListener for Login Button
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sessionManager.isLoggedIn() == false){
+
+                    sessionManager.checkLogin();
+                    finish();
+                }
+                else{
+                    sessionManager.logoutUser();
+                    finish();
+                }
+
+            }
+        });
+
+    //***************************************SESSION CODE ENDS*******************************************
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu)

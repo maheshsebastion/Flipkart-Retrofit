@@ -28,6 +28,8 @@ public class LoginActivity extends AppActivity implements LoginEventSubscriber {
 
     User user = new User();
 
+    SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -35,6 +37,8 @@ public class LoginActivity extends AppActivity implements LoginEventSubscriber {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_activity_login);
+
+        sessionManager = new SessionManager(getApplicationContext());
 
         editTextEmail = (EditText) findViewById(R.id.email);
         editTextPassword = (EditText) findViewById(R.id.password);
@@ -100,7 +104,12 @@ public class LoginActivity extends AppActivity implements LoginEventSubscriber {
         if (loginAPIResponse.isSuccess()){
 
             user = loginAPIResponse.getUser();
+            //Putting datas to the shared preference
+            sessionManager.createLoginSession(user.getName(),user.getEmail());
+
             ToastUtil.showCenterToast(getApplicationContext(),loginAPIResponse.getMessage());
+
+            //Start Activity
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
