@@ -75,7 +75,7 @@ public class Category {
         return iconPath;
     }
 
-    //getting the Icon URL
+    //gettingstoredJSON the Icon URL
     public String getIconUrl() {
 
         return APIUtil.IMAGE_URL+this.getIconPath()+"/"+this.getIconName();

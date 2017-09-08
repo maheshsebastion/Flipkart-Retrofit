@@ -20,12 +20,16 @@ import com.example.admin.flipkart.product.activity.ProductActivity;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class BrandActivity extends AppActivity implements SettingsEventSubscriber {
+
+    @BindView(R.id.nav_action) Toolbar toolbar;
+    @BindView(R.id.brandLV)    ListView blistView;
 
     BrandActivity mActivity;
 
-    Toolbar toolbar;
-    ListView blistView;
     ArrayList<Brand> brandArrayList = new ArrayList<>();
     AdapterBrand adapterBrand;
 
@@ -37,7 +41,9 @@ public class BrandActivity extends AppActivity implements SettingsEventSubscribe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_activity_brand);
 
-        toolbar = (Toolbar) findViewById(R.id.nav_action);
+        //Butter Knife binding this activity.....
+        ButterKnife.bind(this);
+
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -50,7 +56,6 @@ public class BrandActivity extends AppActivity implements SettingsEventSubscribe
 
         showProgress();
         CommunicationManager.getInstance().getCategoryListByBrand(mActivity);
-        blistView = (ListView) findViewById(R.id.brandLV);
     }
 
     @Override

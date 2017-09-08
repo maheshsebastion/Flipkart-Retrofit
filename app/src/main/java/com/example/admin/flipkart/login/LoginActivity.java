@@ -20,11 +20,16 @@ import com.example.admin.flipkart.models.User;
 import com.example.admin.flipkart.request.LoginRequest;
 import com.thapovan.android.commonutils.toast.ToastUtil;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class LoginActivity extends AppActivity implements LoginEventSubscriber {
 
-    LoginActivity mActivity;
+    @BindView(R.id.email)    EditText editTextEmail;
+    @BindView(R.id.password) EditText editTextPassword;
 
-    EditText editTextEmail,editTextPassword;
+    LoginActivity mActivity;
 
     User user = new User();
 
@@ -38,62 +43,54 @@ public class LoginActivity extends AppActivity implements LoginEventSubscriber {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_activity_login);
 
+        //Butter Knife binding this activity.....
+        ButterKnife.bind(this);
+
         sessionManager = new SessionManager(getApplicationContext());
 
-        editTextEmail = (EditText) findViewById(R.id.email);
-        editTextPassword = (EditText) findViewById(R.id.password);
+    }
 
+    //Onclick for REGISTER BUTTON
+    @OnClick(R.id.register)
+    public void registerBTN(){
+        Intent intent = new Intent(getApplicationContext(),RegisterActivity.class);
+        startActivity(intent);
+    }
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    //Onclick for LOGIN BUTTON
+    @OnClick(R.id.email_sign_in_button)
+    public void loginBTN(){
+        String editEmail = editTextEmail.getText().toString();
+        String editPassword = editTextPassword.getText().toString();
 
-                String editEmail = editTextEmail.getText().toString();
-                String editPassword = editTextPassword.getText().toString();
+        String emailPattern =  "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-                String emailPattern =  "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        if (!editEmail.matches(emailPattern) || editPassword.length()<6 || TextUtils.isEmpty(editEmail) || TextUtils.isEmpty(editPassword)){
 
-                if (!editEmail.matches(emailPattern) || editPassword.length()<6 || TextUtils.isEmpty(editEmail) || TextUtils.isEmpty(editPassword)){
-
-                    if (!editEmail.matches(emailPattern)) {
-                        editTextEmail.setError(getString(R.string.error_email_mismatch));
-                    }
-                    if(editPassword.length()<6) {
-                        editTextPassword.setError(getString(R.string.error_password_size));
-                    }
-                    //Checking fields are empty
-                    if (TextUtils.isEmpty(editEmail)){
-                        editTextEmail.setError(getString(R.string.error_field_required));
-                    }
-                    if (TextUtils.isEmpty(editPassword)){
-                        editTextPassword.setError(getString(R.string.error_field_required));
-                    }
-
-                }else {
-
-                        LoginRequest loginRequest = new LoginRequest();
-                        loginRequest.setEmail(editEmail);
-                        loginRequest.setPassword(editPassword);
-
-                        showProgress();
-                        //API Call Through CommunicationManager Class------>
-                        CommunicationManager.getInstance().postLoginDetails(loginRequest,mActivity);
-                    }
-
+            if (!editEmail.matches(emailPattern)) {
+                editTextEmail.setError(getString(R.string.error_email_mismatch));
             }
-        });
-        TextView mRegister = (TextView) findViewById(R.id.register);
-        mRegister.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getApplicationContext(),RegisterActivity.class);
-                startActivity(intent);
-
+            if(editPassword.length()<6) {
+                editTextPassword.setError(getString(R.string.error_password_size));
             }
-        });
+            //Checking fields are empty
+            if (TextUtils.isEmpty(editEmail)){
+                editTextEmail.setError(getString(R.string.error_field_required));
+            }
+            if (TextUtils.isEmpty(editPassword)){
+                editTextPassword.setError(getString(R.string.error_field_required));
+            }
 
+        }else {
+
+            LoginRequest loginRequest = new LoginRequest();
+            loginRequest.setEmail(editEmail);
+            loginRequest.setPassword(editPassword);
+
+            showProgress();
+            //API Call Through CommunicationManager Class------>
+            CommunicationManager.getInstance().postLoginDetails(loginRequest,mActivity);
+        }
     }
 
     @Override
@@ -105,7 +102,7 @@ public class LoginActivity extends AppActivity implements LoginEventSubscriber {
 
             user = loginAPIResponse.getUser();
             //Putting datas to the shared preference
-            sessionManager.createLoginSession(user.getName(),user.getEmail());
+            sessionManager.createLoginSession(user);
 
             ToastUtil.showCenterToast(getApplicationContext(),loginAPIResponse.getMessage());
 

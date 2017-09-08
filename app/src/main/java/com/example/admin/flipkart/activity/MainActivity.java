@@ -16,50 +16,55 @@ import com.example.admin.flipkart.R;
 import com.example.admin.flipkart.api.util.APIUtil;
 import com.example.admin.flipkart.app.AppActivity;
 import com.example.admin.flipkart.brand.activity.BrandActivity;
-import com.example.admin.flipkart.login.LoginActivity;
 import com.example.admin.flipkart.login.SessionManager;
+import com.example.admin.flipkart.models.User;
 import com.example.admin.flipkart.product.activity.ProductActivity;
 import com.example.admin.flipkart.category.activity.AllCategoryActivity;
+import com.google.gson.Gson;
 import com.thapovan.android.commonutils.toast.ToastUtil;
 
 import java.util.HashMap;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class MainActivity extends AppActivity {
 
-    private DrawerLayout mDrawerLayout;
+    @BindView(R.id.main_drawerLayout) DrawerLayout mDrawerLayout;
+    @BindView(R.id.nav_action)        Toolbar mToolbar;
+    //used for set button text as LOGIN and LOGOUT
+    @BindView(R.id.btnLogin)          Button btnLogin;
+    @BindView(R.id.nav_view)          NavigationView navigationView;
+
     private android.support.v7.app.ActionBarDrawerToggle mToggle;
 
-    private Toolbar mToolbar;
-
-    Button viewall,btnLogin;
-    TextView more;
-
-    NavigationView navigationView;
-
     SessionManager sessionManager;
+    Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_activity_main);
 
+        //Butter Knife binding this activity.....
+        ButterKnife.bind(this);
+
+        //declaraton for SHARED PREFERENCE
         sessionManager = new SessionManager(getApplicationContext());
+        gson = new Gson();
 
-        mToolbar = (Toolbar) findViewById(R.id.nav_action);
+        //declarations for THIS ACTIVITY
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(R.string.main);
 
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.main_drawerLayout);
         mToggle = new android.support.v7.app.ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
 
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
 
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(R.string.main);
-
 //providing action with on click listnener for items in navigation drawer
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -86,67 +91,53 @@ public class MainActivity extends AppActivity {
             }
         });
 
-        //setting onClickListener for View All Button
-        viewall = (Button) findViewById(R.id.viewall);
-        viewall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),ProductActivity.class);
-                intent.setClass(v.getContext(),ProductActivity.class);
-                intent.putExtra(APIUtil.KEY_SOURCE,APIUtil.SOURCE_FROM_MAIN);
-                startActivity(intent);
-            }
-        });
-
-
-
-        //setting onClickListener for TEXTVIEW more
-        more = (TextView) findViewById(R.id.tv_more);
-        more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),AllCategoryActivity.class);
-                startActivity(intent);
-            }
-        });
-
     //***************************************SESSION CODE*******************************************
 
-        HashMap<String,String> user = sessionManager.getUserDetails();
+//        HashMap<String,String> user = sessionManager.getUserDetails();
 
-        String name = user.get(sessionManager.KEY_NAME);
-        String email = user.get(sessionManager.KEY_EMAIL);
-
-        btnLogin = (Button) findViewById(R.id.btnLogin);
+        //allocating the JSON to the "User" model and accessing it through the created OBJECT
+        User loginuserdata = gson.fromJson(sessionManager.gettingstoredJSON(),User.class);
 
         if (sessionManager.isLoggedIn() == false){
             ToastUtil.showCenterToast(getApplicationContext(),"Please Login to your account....");
             btnLogin.setText("Login");
         }else {
-            ToastUtil.showCenterToast(getApplicationContext(),"Your Name is : "+name);
-            ToastUtil.showCenterToast(getApplicationContext(),"Your Email is : "+email);
+            ToastUtil.showCenterToast(getApplicationContext(),"Your Name is : "+loginuserdata.getName());
             btnLogin.setText("Logout");
         }
 
-        //setting onClickListener for Login Button
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (sessionManager.isLoggedIn() == false){
-
-                    sessionManager.checkLogin();
-                    finish();
-                }
-                else{
-                    sessionManager.logoutUser();
-                    finish();
-                }
-
-            }
-        });
-
     //***************************************SESSION CODE ENDS*******************************************
     }
+
+    //setting onClickListener for TEXTVIEW more
+    @OnClick(R.id.tv_more)
+    public void more(View v){
+        Intent intent = new Intent(v.getContext(),AllCategoryActivity.class);
+        startActivity(intent);
+    }
+
+    //setting onClickListener for View All Button
+    @OnClick(R.id.viewall)
+    public void viewAll(View v){
+        Intent intent = new Intent(v.getContext(),ProductActivity.class);
+        intent.setClass(v.getContext(),ProductActivity.class);
+        intent.putExtra(APIUtil.KEY_SOURCE,APIUtil.SOURCE_FROM_MAIN);
+        startActivity(intent);
+    }
+
+    //setting onClickListener for Login Button
+    @OnClick(R.id.btnLogin)
+    public void login(View v){
+        if (sessionManager.isLoggedIn() == false){
+
+            sessionManager.checkLogin();
+        }
+        else{
+            sessionManager.logoutUser();
+            finish();
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {

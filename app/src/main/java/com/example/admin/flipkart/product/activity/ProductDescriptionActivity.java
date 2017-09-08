@@ -1,7 +1,10 @@
 package com.example.admin.flipkart.product.activity;
 
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,9 +20,18 @@ import com.thapovan.android.customui.TouchImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ProductDescriptionActivity extends AppActivity {
-    TouchImageView productImage;
-    TextView price,name,sprice,allDetails,specification;
+
+    @BindView(R.id.pPrice)        TextView price;
+    @BindView(R.id.pName)         TextView name;
+    @BindView(R.id.sPrice)        TextView sprice;
+    @BindView(R.id.specification) TextView specification;
+    @BindView(R.id.pImage)        TouchImageView productImage;
+    @BindView(R.id.linear)        LinearLayout layout;
+    @BindView(R.id.nav_action)    Toolbar toolbar;
 
     private List<Products> pList;
     int position;
@@ -29,25 +41,21 @@ public class ProductDescriptionActivity extends AppActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_activity_product_description);
 
-        productImage = (TouchImageView) findViewById(R.id.pImage);
-        price = (TextView) findViewById(R.id.pPrice);
-        name = (TextView) findViewById(R.id.pName);
-        sprice = (TextView) findViewById(R.id.sPrice);
-        allDetails = (TextView) findViewById(R.id.allDetails);
-        specification = (TextView) findViewById(R.id.specification);
+        //Butter Knife binding this activity.....
+        ButterKnife.bind(this);
 
-        //getting DATA and POSITION using Parcelable
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
 
+        //gettingstoredJSON DATA and POSITION using Parcelable
         pList = (ArrayList) getIntent().getParcelableArrayListExtra(APIUtil.KEY_PRODUCTS);
         position = getIntent().getIntExtra(APIUtil.KEY_POSITION,00);
 
-        //getting Featured Images from Products model and put it on glide
+        //gettingstoredJSON Featured Images from Products model and put it on glide
         Glide.with(this)
                 .load(pList.get(position).getFeaturedImages().getImageUrl())
                 .into(productImage);
-
-
-        LinearLayout layout = (LinearLayout) findViewById(R.id.linear);
 
         //GETTING and STORING the GALLERY IMAGES here
         ArrayList gallery = pList.get(position).getGalleryImages();
@@ -70,7 +78,7 @@ public class ProductDescriptionActivity extends AppActivity {
                 @Override
                 public void onClick(View v) {
 
-                    //getting the image from one imageview and put it on another imageview in same activity
+                    //gettingstoredJSON the image from one imageview and put it on another imageview in same activity
                     productImage.setImageDrawable(imageView.getDrawable());
                 }
             });
@@ -83,6 +91,19 @@ public class ProductDescriptionActivity extends AppActivity {
         specification.setText(Html.fromHtml(pList.get(position).getSpec()).toString());
 
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.layout_product_menu_buttons, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

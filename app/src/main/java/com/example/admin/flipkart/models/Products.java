@@ -210,7 +210,7 @@ public class Products implements Parcelable {
         for(int i=0;i<images.size();i++) {
             if (images.get(i).getType().equals("FEATURED")) {
 
-                //getting and returning only the featured images to the other classes
+                //gettingstoredJSON and returning only the featured images to the other classes
                 return images.get(i);
             }
         }
@@ -223,7 +223,7 @@ public class Products implements Parcelable {
         for(int i=0;i<images.size();i++){
 
             if(images.get(i).getType().equals("GALLERY")){
-                //getting and returning only the Gallery images to the other classes
+                //gettingstoredJSON and returning only the Gallery images to the other classes
                 gallery.add(images.get(i).getImageUrl());
             }
         }

@@ -1,5 +1,6 @@
 package com.example.admin.flipkart.product.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.admin.flipkart.api.util.CommunicationManager;
 import com.example.admin.flipkart.app.AppActivity;
@@ -16,17 +18,21 @@ import com.example.admin.flipkart.api.subscriber.ProductEventSubscriber;
 import com.example.admin.flipkart.api.util.APIUtil;
 import com.example.admin.flipkart.models.Products;
 import com.example.admin.flipkart.api.response.ProductAPIResponse;
+import com.thapovan.android.commonutils.recyclerview.RecyclerTouchListener;
 import com.thapovan.android.commonutils.toast.ToastUtil;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ProductActivity extends AppActivity implements ProductEventSubscriber {
+
+    @BindView(R.id.nav_action) Toolbar mToolbar;
+    @BindView(R.id.recycle)    RecyclerView recyclerView;
 
     ProductActivity mActivity;
 
-    private Toolbar mToolbar;
-
-    RecyclerView recyclerView;
     ArrayList<Products> pList;
 
     @Override
@@ -37,7 +43,9 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_activity_products);
 
-        mToolbar = (Toolbar) findViewById(R.id.nav_action);
+        //Butter Knife binding this activity.....
+        ButterKnife.bind(this);
+
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.product);
@@ -73,7 +81,26 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
             showProgress();
             CommunicationManager.getInstance().getProductBrand(mActivity,brandId);
         }
-        recyclerView = (RecyclerView) findViewById(R.id.recycle);
+
+        pList = new ArrayList<>();
+
+        new RecyclerTouchListener(mActivity, recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+
+                Intent intent = new Intent(view.getContext(),ProductDescriptionActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra(APIUtil.KEY_PRODUCTS,pList);
+                intent.putExtra(APIUtil.KEY_POSITION,position);
+                view.getContext().startActivity(intent);
+
+            }
+
+            @Override
+            public void onLongClick(View view, int i) {
+
+            }
+        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu)

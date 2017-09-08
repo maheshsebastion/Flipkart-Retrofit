@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 
 import com.example.admin.flipkart.activity.MainActivity;
 import com.example.admin.flipkart.app.AppActivity;
+import com.example.admin.flipkart.models.User;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 
@@ -20,6 +22,8 @@ public class SessionManager extends AppActivity{
     //Context
     Context context;
 
+    Gson gson;
+
     // Editor for Shared preferences
     SharedPreferences.Editor editor;
 
@@ -29,11 +33,9 @@ public class SessionManager extends AppActivity{
     // All Shared Preferences Keys
     private static final String IS_LOGIN = "IsLoggedIn";
 
-    // User name (make variable public to access from outside)
-    public static final String KEY_NAME = "name";
 
-    // Email address (make variable public to access from outside)
-    public static final String KEY_EMAIL = "email";
+    // User Object variable (make variable public to access from outside)
+    public static final String KEY_OBJECT = "UserObject";
 
     //Constructor for SessionManager
     public SessionManager(Context context) {
@@ -41,36 +43,39 @@ public class SessionManager extends AppActivity{
         this.context = context;
         sharedpreferences = context.getSharedPreferences(PREF_NAME,context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
+        gson = new Gson();
 
     }
 
     //Create login session
-    public void createLoginSession(String name, String email){
+    public void createLoginSession(Object object){
+
+        String userData = gson.toJson(object);
+
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
 
-        // Storing name in pref
-        editor.putString(KEY_NAME, name);
+        // Storing Object in pref
+        editor.putString(KEY_OBJECT, userData);
 
-        // Storing email in pref
-        editor.putString(KEY_EMAIL, email);
+        /*// Storing email in pref
+        editor.putString(KEY_EMAIL, email);*/
 
         // commit changes
         editor.commit();
     }
 
     //Get Stored Session
-    public HashMap<String, String> getUserDetails(){
+  /*  public HashMap<String, String> getUserDetails(){
         HashMap<String, String> user = new HashMap<String, String>();
-        // user name
-        user.put(KEY_NAME, sharedpreferences.getString(KEY_NAME, null));
+        // user OBJECT
+        user.put(KEY_OBJECT, sharedpreferences.getString(KEY_OBJECT, null));
 
         // user email id
         user.put(KEY_EMAIL, sharedpreferences.getString(KEY_EMAIL, null));
 
-        // return user
         return user;
-    }
+    }*/
 
     //Clear Session Details
     public void logoutUser(){
@@ -118,5 +123,12 @@ public class SessionManager extends AppActivity{
     // Get Login State
     public boolean isLoggedIn(){
         return sharedpreferences.getBoolean(IS_LOGIN, false);
+    }
+
+    //gettingstoredJSON the JSON from SHAREDPREFERENCE EDITOR
+    public String gettingstoredJSON(){
+
+        String userdata = sharedpreferences.getString(KEY_OBJECT, "");
+        return userdata;
     }
 }

@@ -12,11 +12,16 @@ import com.example.admin.flipkart.models.Brand;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Admin on 01-09-2017.
  */
 
 public class AdapterBrand extends BaseAdapter {
+
+    @BindView(R.id.brandITEM) TextView tv_brand;
 
     Context context;
     public ArrayList<Brand> brandList;
@@ -46,8 +51,11 @@ public class AdapterBrand extends BaseAdapter {
     public View getView(int position, View view, ViewGroup viewGroup) {
 
         view = blayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_brand, viewGroup, false);
+
+        //Butter Knife binding this activity.....should come after above view statement.
+        ButterKnife.bind(this,view);
+
         Brand brand = brandList.get(position);
-        TextView tv_brand = (TextView) view.findViewById(R.id.brandITEM);
         tv_brand.setText(brand.getName());
 
         return view;

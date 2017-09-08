@@ -21,17 +21,20 @@ import com.example.admin.flipkart.product.activity.ProductActivity;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class AllCategoryActivity extends AppActivity implements SettingsEventSubscriber {
 
     AllCategoryActivity mActivity;
 
-    private DrawerLayout mDrawerLayout;
+    @BindView(R.id.category_drawerLayout) DrawerLayout mDrawerLayout;
+    @BindView(R.id.categoryELV) ExpandableListView expandableListView;
+    @BindView(R.id.nav_action) Toolbar mToolbar;
+
     private android.support.v7.app.ActionBarDrawerToggle mToggle;
 
-    private Toolbar mToolbar;
-
     AdapterAllCategory adapterAllCategory;
-    ExpandableListView expandableListView;
     ArrayList<Category> cList;
 
     @Override
@@ -42,10 +45,11 @@ public class AllCategoryActivity extends AppActivity implements SettingsEventSub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_activity_all_category);
 
-        mToolbar = (Toolbar) findViewById(R.id.nav_action);
+        //Butter Knife binding this activity.....
+        ButterKnife.bind(this);
+
         setSupportActionBar(mToolbar);
 
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.category_drawerLayout);
         mToggle = new android.support.v7.app.ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
 
         mDrawerLayout.addDrawerListener(mToggle);
@@ -60,7 +64,6 @@ public class AllCategoryActivity extends AppActivity implements SettingsEventSub
         showProgress();
         CommunicationManager.getInstance().getCategories(mActivity);
 
-        expandableListView = (ExpandableListView) findViewById(R.id.categoryELV);
 
     }    @Override
     public boolean onCreateOptionsMenu(Menu menu)

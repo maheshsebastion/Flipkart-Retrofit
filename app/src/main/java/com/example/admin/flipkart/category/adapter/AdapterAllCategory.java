@@ -30,8 +30,6 @@ public class AdapterAllCategory extends BaseExpandableListAdapter {
         this.categoryList = categoryList;
     }
 
-
-
     @Override
     public Object getChild(int groupPosition, int childPosition) {
         List<CategoryChild> childList = categoryList.get(groupPosition).getChildren();
@@ -46,7 +44,7 @@ public class AdapterAllCategory extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
-        //getting datas from CategoryChild CLASS directly
+        //gettingstoredJSON datas from CategoryChild CLASS directly
         CategoryChild child = (CategoryChild) getChild(groupPosition,childPosition);
 
         if(convertView == null){
