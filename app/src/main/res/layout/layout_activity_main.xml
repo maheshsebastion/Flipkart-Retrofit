@@ -48,7 +48,8 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:orientation="horizontal"
-                android:weightSum="5">
+                android:weightSum="5"
+                android:padding="3dp">
 
                 <TextView
                     android:id="@+id/txtView1"
@@ -252,7 +253,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="2">
+                android:weightSum="2"
+                android:padding="5dp">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -286,30 +288,34 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                    android:paddingTop="10dp">
 
                     <Button
                         android:id="@+id/viewall"
-                        android:layout_width="100dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="10dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginLeft="30dp"
                         android:text="@string/viewall"
                         android:textAllCaps="false"
                         android:textSize="17dp"
                         android:textStyle="bold"
-                        android:layout_weight="1"/>
-                    <Button
-                        android:id="@+id/btnLogin"
-                        android:layout_width="100dp"
-                        android:layout_height="40dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginLeft="30dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:background="@color/lightblue"/>
+                    <TextView
+                        android:id="@+id/tvLogin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
                         android:text="@string/action_sign_in"
-                        android:textAllCaps="false"
-                        android:textSize="17dp"
+                        android:textSize="20dp"
                         android:textStyle="bold"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:drawableLeft="@drawable/login"/>
                 </LinearLayout>
             </LinearLayout>
 

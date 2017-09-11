@@ -65,7 +65,9 @@ public class AllCategoryActivity extends AppActivity implements SettingsEventSub
         CommunicationManager.getInstance().getCategories(mActivity);
 
 
-    }    @Override
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.layout_menu_buttons, menu);

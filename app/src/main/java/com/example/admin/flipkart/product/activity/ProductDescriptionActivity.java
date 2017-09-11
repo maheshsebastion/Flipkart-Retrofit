@@ -12,9 +12,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.admin.flipkart.R;
+import com.example.admin.flipkart.api.response.ProductAPIResponse;
 import com.example.admin.flipkart.api.util.APIUtil;
 import com.example.admin.flipkart.app.AppActivity;
+import com.example.admin.flipkart.login.SessionManager;
+import com.example.admin.flipkart.models.Cart;
 import com.example.admin.flipkart.models.Products;
+import com.thapovan.android.commonutils.toast.ToastUtil;
 import com.thapovan.android.customui.TouchImageView;
 
 import java.util.ArrayList;
@@ -22,6 +26,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ProductDescriptionActivity extends AppActivity {
 
@@ -36,6 +41,10 @@ public class ProductDescriptionActivity extends AppActivity {
     private List<Products> pList;
     int position;
 
+    Cart cart = new Cart();
+
+    SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +52,8 @@ public class ProductDescriptionActivity extends AppActivity {
 
         //Butter Knife binding this activity.....
         ButterKnife.bind(this);
+
+        sessionManager = new SessionManager(getApplicationContext());
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -92,6 +103,21 @@ public class ProductDescriptionActivity extends AppActivity {
 
 
     }
+
+    @OnClick(R.id.btnADDTOCART)
+    public void onAddToCartClicked(){
+
+        if (sessionManager.isLoggedIn()){
+
+            cart.setId(pList.get(position).getId());
+            sessionManager.addProductToCart(cart);
+            ToastUtil.showCenterToast(getApplicationContext(),"Added to cart "+cart.getId());
+        }else {
+            ToastUtil.showCenterToast(getApplicationContext(),"You need to login tour account");
+            sessionManager.checkLogin();
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {

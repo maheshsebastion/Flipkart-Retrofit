@@ -9,21 +9,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.admin.flipkart.R;
 import com.example.admin.flipkart.api.util.APIUtil;
 import com.example.admin.flipkart.app.AppActivity;
 import com.example.admin.flipkart.brand.activity.BrandActivity;
+import com.example.admin.flipkart.login.LoginActivity;
 import com.example.admin.flipkart.login.SessionManager;
 import com.example.admin.flipkart.models.User;
 import com.example.admin.flipkart.product.activity.ProductActivity;
 import com.example.admin.flipkart.category.activity.AllCategoryActivity;
 import com.google.gson.Gson;
 import com.thapovan.android.commonutils.toast.ToastUtil;
-
-import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,7 +32,7 @@ public class MainActivity extends AppActivity {
     @BindView(R.id.main_drawerLayout) DrawerLayout mDrawerLayout;
     @BindView(R.id.nav_action)        Toolbar mToolbar;
     //used for set button text as LOGIN and LOGOUT
-    @BindView(R.id.btnLogin)          Button btnLogin;
+    @BindView(R.id.tvLogin)           TextView tvLogin;
     @BindView(R.id.nav_view)          NavigationView navigationView;
 
     private android.support.v7.app.ActionBarDrawerToggle mToggle;
@@ -98,12 +96,12 @@ public class MainActivity extends AppActivity {
         //allocating the JSON to the "User" model and accessing it through the created OBJECT
         User loginuserdata = gson.fromJson(sessionManager.gettingstoredJSON(),User.class);
 
-        if (sessionManager.isLoggedIn() == false){
-            ToastUtil.showCenterToast(getApplicationContext(),"Please Login to your account....");
-            btnLogin.setText("Login");
-        }else {
+        if (sessionManager.isLoggedIn()){
             ToastUtil.showCenterToast(getApplicationContext(),"Your Name is : "+loginuserdata.getName());
-            btnLogin.setText("Logout");
+            tvLogin.setText("Logout");
+        }else {
+            ToastUtil.showCenterToast(getApplicationContext(),"Please Login to your account....");
+            tvLogin.setText("Login");
         }
 
     //***************************************SESSION CODE ENDS*******************************************
@@ -111,30 +109,30 @@ public class MainActivity extends AppActivity {
 
     //setting onClickListener for TEXTVIEW more
     @OnClick(R.id.tv_more)
-    public void more(View v){
+    public void onMoreClicked(View v){
         Intent intent = new Intent(v.getContext(),AllCategoryActivity.class);
         startActivity(intent);
     }
 
     //setting onClickListener for View All Button
     @OnClick(R.id.viewall)
-    public void viewAll(View v){
+    public void onViewAllClicked(View v){
         Intent intent = new Intent(v.getContext(),ProductActivity.class);
         intent.setClass(v.getContext(),ProductActivity.class);
         intent.putExtra(APIUtil.KEY_SOURCE,APIUtil.SOURCE_FROM_MAIN);
         startActivity(intent);
     }
 
-    //setting onClickListener for Login Button
-    @OnClick(R.id.btnLogin)
-    public void login(View v){
-        if (sessionManager.isLoggedIn() == false){
+    //setting onClickListener for Login TextView
+    @OnClick(R.id.tvLogin)
+    public void onLoginClicked(View v){
+        if (sessionManager.isLoggedIn()){
 
-            sessionManager.checkLogin();
-        }
-        else{
             sessionManager.logoutUser();
             finish();
+        }
+        else{
+            sessionManager.checkLogin();
         }
     }
 
@@ -152,5 +150,19 @@ public class MainActivity extends AppActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResume()
+    {  // After a pause OR at startup
+        super.onResume();
+        //Refresh your stuff here
+        if (sessionManager.isLoggedIn()){
+
+            tvLogin.setText("Logout");
+        }else {
+
+            tvLogin.setText("Login");
+        }
     }
 }

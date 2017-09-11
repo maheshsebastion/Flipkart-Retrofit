@@ -6,10 +6,7 @@ import android.content.SharedPreferences;
 
 import com.example.admin.flipkart.activity.MainActivity;
 import com.example.admin.flipkart.app.AppActivity;
-import com.example.admin.flipkart.models.User;
 import com.google.gson.Gson;
-
-import java.util.HashMap;
 
 /**
  * Created by Admin on 07-09-2017.
@@ -35,7 +32,11 @@ public class SessionManager extends AppActivity{
 
 
     // User Object variable (make variable public to access from outside)
-    public static final String KEY_OBJECT = "UserObject";
+    public static final String KEY_USER_OBJECT = "UserObject";
+
+    // Cart ID variable (make variable public to access from outside)
+    public static final String KEY_CART_OBJECT = "CartId";
+
 
     //Constructor for SessionManager
     public SessionManager(Context context) {
@@ -47,29 +48,11 @@ public class SessionManager extends AppActivity{
 
     }
 
-    //Create login session
-    public void createLoginSession(Object object){
-
-        String userData = gson.toJson(object);
-
-        // Storing login value as TRUE
-        editor.putBoolean(IS_LOGIN, true);
-
-        // Storing Object in pref
-        editor.putString(KEY_OBJECT, userData);
-
-        /*// Storing email in pref
-        editor.putString(KEY_EMAIL, email);*/
-
-        // commit changes
-        editor.commit();
-    }
-
     //Get Stored Session
   /*  public HashMap<String, String> getUserDetails(){
         HashMap<String, String> user = new HashMap<String, String>();
         // user OBJECT
-        user.put(KEY_OBJECT, sharedpreferences.getString(KEY_OBJECT, null));
+        user.put(KEY_USER_OBJECT, sharedpreferences.getString(KEY_USER_OBJECT, null));
 
         // user email id
         user.put(KEY_EMAIL, sharedpreferences.getString(KEY_EMAIL, null));
@@ -124,11 +107,46 @@ public class SessionManager extends AppActivity{
     public boolean isLoggedIn(){
         return sharedpreferences.getBoolean(IS_LOGIN, false);
     }
+    //*************************USER Model for LOGIN and SIGNUP***********************
+
+    //Create login session
+    public void createLoginSession(Object object){
+
+        String userData = gson.toJson(object);
+
+        // Storing login value as TRUE
+        editor.putBoolean(IS_LOGIN, true);
+
+        // Storing Object in pref
+        editor.putString(KEY_USER_OBJECT, userData);
+
+        /*// Storing email in pref
+        editor.putString(KEY_EMAIL, email);*/
+
+        // commit changes
+        editor.commit();
+    }
 
     //gettingstoredJSON the JSON from SHAREDPREFERENCE EDITOR
     public String gettingstoredJSON(){
 
-        String userdata = sharedpreferences.getString(KEY_OBJECT, "");
+        String userdata = sharedpreferences.getString(KEY_USER_OBJECT, "");
         return userdata;
     }
+    //*************************ENDS HERE ********* USER Model for LOGIN and SIGNUP***********************
+
+    //*************************CART Model for AddToCart***********************
+
+    //Create ADD PRODUCT TO CART session
+    public void addProductToCart(Object object){
+
+        String cartData = gson.toJson(object);
+
+        // Storing id in pref
+        editor.putString(KEY_CART_OBJECT, cartData);
+
+        // commit changes
+        editor.commit();
+    }
+    //*************************ENDS HERE ********** CART Model for AddToCart***********************
 }

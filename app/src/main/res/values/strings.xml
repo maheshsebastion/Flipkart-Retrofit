@@ -26,6 +26,8 @@
     <string name="time">01h 42m remaining</string>
     <string name="viewall">View All</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="buynow">BUY NOW</string>
+    <string name="addtocart">ADD TO CART</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

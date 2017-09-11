@@ -50,6 +50,7 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.product);
 
+        //setting up the BACK ARROW in ACTION BAR
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(true);

@@ -59,7 +59,7 @@ public class LoginActivity extends AppActivity implements LoginEventSubscriber {
 
     //Onclick for LOGIN BUTTON
     @OnClick(R.id.email_sign_in_button)
-    public void loginBTN(){
+    public void onloginBTN(){
         String editEmail = editTextEmail.getText().toString();
         String editPassword = editTextPassword.getText().toString();
 
@@ -106,9 +106,6 @@ public class LoginActivity extends AppActivity implements LoginEventSubscriber {
 
             ToastUtil.showCenterToast(getApplicationContext(),loginAPIResponse.getMessage());
 
-            //Start Activity
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
             finish();
 
         }else {

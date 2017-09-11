@@ -49,7 +49,7 @@ public class RegisterActivity extends AppActivity implements RegisterEventSubscr
     }
 
     @OnClick(R.id.btnRegister)
-    public void RegisterBTN(){
+    public void onRegisterBtnClicked(){
 
         String name = mName.getText().toString();
         String email = TextUtil.cleanupString(mEmail.getText().toString());
@@ -115,8 +115,6 @@ public class RegisterActivity extends AppActivity implements RegisterEventSubscr
         if(registerAPIResponse.isSuccess()) {
             user = registerAPIResponse.getUser();
             ToastUtil.showCenterToast(getApplicationContext(),registerAPIResponse.getMessage());
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
             ToastUtil.showCenterToast(getApplicationContext(),"Please Login to your account...");
             finish();
         }
