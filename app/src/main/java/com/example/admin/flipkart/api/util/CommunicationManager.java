@@ -26,9 +26,9 @@ public class CommunicationManager {
 
     private CommunicationManager() {
     }
-    public void getProducts(Activity activity){
+    public void getProducts(int page, Activity activity){
 
-        ProductAPI.getProducts((ProductEventSubscriber) activity);
+        ProductAPI.getProducts(page, (ProductEventSubscriber) activity);
 
     }
     public void getProductCategory(Activity activity,int categoryId){

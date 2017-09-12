@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.admin.flipkart.api.util.CommunicationManager;
+import com.example.admin.flipkart.api.util.RecyclerViewInfiniteScrollListener;
 import com.example.admin.flipkart.app.AppActivity;
 import com.example.admin.flipkart.product.adapter.AdapterListProduct;
 import com.example.admin.flipkart.R;
@@ -35,6 +37,10 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
     ArrayList<Products> pList;
 
+    AdapterListProduct recyclerAdapter;
+
+    LinearLayoutManager linearLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -45,6 +51,8 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
         //Butter Knife binding this activity.....
         ButterKnife.bind(this);
+
+        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -61,29 +69,45 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
         String KEY_SOURCE = getIntent().getExtras().getString(APIUtil.KEY_SOURCE);
 
-        if(KEY_SOURCE.equals(APIUtil.SOURCE_FROM_MAIN)){
-
-            showProgress();
-            CommunicationManager.getInstance().getProducts(mActivity);
-        }
-        else if (KEY_SOURCE.equals(APIUtil.SOURCE_FROM_AllCATEGORY)){
-
-            int categoryId = getIntent().getIntExtra(APIUtil.KEY_POSITION,0);
-            String categoryName = getIntent().getStringExtra(APIUtil.STORED_ITEMS);
-            getSupportActionBar().setTitle(categoryName);
-            showProgress();
-            CommunicationManager.getInstance().getProductCategory(mActivity,categoryId);
-        }
-        else if (KEY_SOURCE.equals(APIUtil.SOURCE_FROM_BRAND)){
-
-            int brandId = getIntent().getIntExtra(APIUtil.KEY_POSITION,0);
-            String brandName = getIntent().getStringExtra(APIUtil.STORED_ITEMS);
-            getSupportActionBar().setTitle(brandName);
-            showProgress();
-            CommunicationManager.getInstance().getProductBrand(mActivity,brandId);
-        }
-
         pList = new ArrayList<>();
+
+        recyclerAdapter = new AdapterListProduct(mActivity, pList);
+        linearLayoutManager = new GridLayoutManager(ProductActivity.this, 2);
+
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(recyclerAdapter);
+
+
+            if(KEY_SOURCE.equals(APIUtil.SOURCE_FROM_MAIN)){
+
+                int page = 1;
+                showProgress();
+                CommunicationManager.getInstance().getProducts(page, mActivity);
+                recyclerView.addOnScrollListener(new RecyclerViewInfiniteScrollListener(linearLayoutManager) {
+                    @Override
+                    public void loadMore(int page) {
+                        CommunicationManager.getInstance().getProducts(page, mActivity);
+                    }
+                });
+            }
+
+            if (KEY_SOURCE.equals(APIUtil.SOURCE_FROM_AllCATEGORY)){
+
+                int categoryId = getIntent().getIntExtra(APIUtil.KEY_POSITION,0);
+                String categoryName = getIntent().getStringExtra(APIUtil.STORED_ITEMS);
+                getSupportActionBar().setTitle(categoryName);
+                showProgress();
+                CommunicationManager.getInstance().getProductCategory(mActivity,categoryId);
+            }
+            else if (KEY_SOURCE.equals(APIUtil.SOURCE_FROM_BRAND)){
+
+                int brandId = getIntent().getIntExtra(APIUtil.KEY_POSITION,0);
+                String brandName = getIntent().getStringExtra(APIUtil.STORED_ITEMS);
+                getSupportActionBar().setTitle(brandName);
+                showProgress();
+                CommunicationManager.getInstance().getProductBrand(mActivity,brandId);
+            }
 
         new RecyclerTouchListener(mActivity, recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
@@ -102,11 +126,12 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
 
             }
         });
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getMenuInflater().inflate(R.menu.layout_product_menu_buttons, menu);
+        getMenuInflater().inflate(R.menu.layout_menu_buttons, menu);
         return super.onCreateOptionsMenu(menu);
     }
     @Override
@@ -121,14 +146,9 @@ public class ProductActivity extends AppActivity implements ProductEventSubscrib
     public void onProductCompleted(ProductAPIResponse productAPIResponse) {
         hideProgress();
         if(productAPIResponse.isSuccess()) {
-            pList = new ArrayList<Products>(productAPIResponse.getProducts());
+            pList.addAll(productAPIResponse.getProducts());
+            recyclerAdapter.notifyDataSetChanged();
 
-            AdapterListProduct recyclerAdapter = new AdapterListProduct(getApplicationContext(), pList);
-            RecyclerView.LayoutManager recyce = new GridLayoutManager(ProductActivity.this, 2);
-
-            recyclerView.setLayoutManager(recyce);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(recyclerAdapter);
         }
         else {
             ToastUtil.showCenterToast(getApplicationContext(), productAPIResponse.getMessage());

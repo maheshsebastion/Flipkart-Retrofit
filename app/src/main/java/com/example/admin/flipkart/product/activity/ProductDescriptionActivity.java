@@ -121,7 +121,7 @@ public class ProductDescriptionActivity extends AppActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getMenuInflater().inflate(R.menu.layout_product_menu_buttons, menu);
+        getMenuInflater().inflate(R.menu.layout_menu_buttons, menu);
         return super.onCreateOptionsMenu(menu);
     }
     @Override

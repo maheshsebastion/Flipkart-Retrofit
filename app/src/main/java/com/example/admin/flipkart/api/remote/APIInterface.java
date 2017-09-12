@@ -22,7 +22,7 @@ import retrofit2.http.Query;
 public interface APIInterface {
 
     @GET(APIUtil.API_PRODUCT)
-    Call<ProductAPIResponse> getProducts();
+    Call<ProductAPIResponse> getProducts(@Query("page") int page);
 
     @GET(APIUtil.API_PRODUCT)
     Call<ProductAPIResponse> getProductByCategory(@Query("category_id") int id);

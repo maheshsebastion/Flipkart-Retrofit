@@ -107,6 +107,8 @@ public class MainActivity extends AppActivity {
     //***************************************SESSION CODE ENDS*******************************************
     }
 
+
+
     //setting onClickListener for TEXTVIEW more
     @OnClick(R.id.tv_more)
     public void onMoreClicked(View v){

@@ -19,9 +19,9 @@ public class ProductAPI extends APIAbstract{
         // empty method
     }
 
-    public static void getProducts(final ProductEventSubscriber subscriber) {
+    public static void getProducts(int page, final ProductEventSubscriber subscriber) {
 
-        apiInterface.getProducts().enqueue(new Callback<ProductAPIResponse>() {
+        apiInterface.getProducts(page).enqueue(new Callback<ProductAPIResponse>() {
             @Override
             public void onResponse(Call<ProductAPIResponse> call, Response<ProductAPIResponse> response) {
                 if(response.isSuccessful()) {
