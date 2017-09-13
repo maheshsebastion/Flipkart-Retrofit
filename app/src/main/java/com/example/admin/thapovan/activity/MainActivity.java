@@ -15,10 +15,15 @@ import com.example.admin.thapovan.R;
 import com.example.admin.thapovan.api.util.APIUtil;
 import com.example.admin.thapovan.app.AppActivity;
 import com.example.admin.thapovan.brand.activity.BrandActivity;
+import com.example.admin.thapovan.firebase.FirebaseActivity;
+import com.example.admin.thapovan.firebase.UserProfileActivity;
 import com.example.admin.thapovan.login.SessionManager;
 import com.example.admin.thapovan.models.User;
 import com.example.admin.thapovan.product.activity.ProductActivity;
 import com.example.admin.thapovan.category.activity.AllCategoryActivity;
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
 import com.thapovan.android.commonutils.toast.ToastUtil;
 
@@ -96,7 +101,7 @@ public class MainActivity extends AppActivity {
         User loginuserdata = gson.fromJson(sessionManager.gettingstoredJSON(),User.class);
 
         if (sessionManager.isLoggedIn()){
-            ToastUtil.showCenterToast(getApplicationContext(),"Your Name is : "+loginuserdata.getName());
+            ToastUtil.showCenterToast(getApplicationContext(),"Welcome Mr/Mrs : "+loginuserdata.getName());
             tvLogin.setText("Logout");
         }else {
             ToastUtil.showCenterToast(getApplicationContext(),"Please Login to your account....");
@@ -129,6 +134,19 @@ public class MainActivity extends AppActivity {
     public void onLoginClicked(View v){
         if (sessionManager.isLoggedIn()){
 
+            AuthUI.getInstance()
+                    .signOut(this)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+//                                FirebaseActivity.start(MainActivity.this);
+                                finish();
+                            } else {
+//                                showSnackbar(R.string.sign_out_failed);
+                            }
+                        }
+                    });
             sessionManager.logoutUser();
             finish();
         }

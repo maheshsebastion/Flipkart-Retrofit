@@ -2,14 +2,17 @@ package com.example.admin.thapovan.api.util;
 
 import android.app.Activity;
 
+import com.example.admin.thapovan.api.event.FirebaseLoginAPI;
 import com.example.admin.thapovan.api.event.LoginAPI;
 import com.example.admin.thapovan.api.event.ProductAPI;
 import com.example.admin.thapovan.api.event.RegisterAPI;
 import com.example.admin.thapovan.api.event.SettingsAPI;
+import com.example.admin.thapovan.api.subscriber.FirebaseLoginEventSubscriber;
 import com.example.admin.thapovan.api.subscriber.LoginEventSubscriber;
 import com.example.admin.thapovan.api.subscriber.ProductEventSubscriber;
 import com.example.admin.thapovan.api.subscriber.RegisterEventSubscriber;
 import com.example.admin.thapovan.api.subscriber.SettingsEventSubscriber;
+import com.example.admin.thapovan.request.FirebaseLoginRequest;
 import com.example.admin.thapovan.request.LoginRequest;
 import com.example.admin.thapovan.request.RegistrationRequest;
 
@@ -59,6 +62,11 @@ public class CommunicationManager {
     public void postLoginDetails(LoginRequest loginRequest,Activity activity){
 
         LoginAPI.postLoginDetails(loginRequest, (LoginEventSubscriber) activity);
+
+    }
+    public void postFirebaseLoginDetails(FirebaseLoginRequest firebaseLoginRequest, Activity activity){
+
+        FirebaseLoginAPI.postFirebaseLoginDetails(firebaseLoginRequest, (FirebaseLoginEventSubscriber) activity);
 
     }
 }

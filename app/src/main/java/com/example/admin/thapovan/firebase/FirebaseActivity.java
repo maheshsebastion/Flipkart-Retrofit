@@ -8,29 +8,46 @@ import android.support.annotation.MainThread;
 import android.support.annotation.StringRes;
 import android.support.annotation.StyleRes;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 
 import com.example.admin.thapovan.R;
+import com.example.admin.thapovan.activity.MainActivity;
+import com.example.admin.thapovan.api.response.FirebaseLoginAPIResponse;
+import com.example.admin.thapovan.api.subscriber.FirebaseLoginEventSubscriber;
+import com.example.admin.thapovan.api.util.CommunicationManager;
 import com.example.admin.thapovan.app.AppActivity;
+import com.example.admin.thapovan.login.SessionManager;
+import com.example.admin.thapovan.models.FireBaseUser;
+import com.example.admin.thapovan.request.FirebaseLoginRequest;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.common.Scopes;
+import com.google.firebase.auth.EmailAuthProvider;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.thapovan.android.commonutils.toast.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FirebaseActivity extends AppActivity {
+public class FirebaseActivity extends AppActivity implements FirebaseLoginEventSubscriber {
 
     @BindView(R.id.root)    View mRootView;
 
     FirebaseActivity mActivity;
+
+    IdpResponse response;
+    SessionManager sessionManager;
 
     private static final int RC_SIGN_IN = 101;
     private static final String UNCHANGED_CONFIG_VALUE = "CHANGE-ME";
@@ -49,9 +66,13 @@ public class FirebaseActivity extends AppActivity {
 
         ButterKnife.bind(mActivity);
 
+        sessionManager = new SessionManager(getApplicationContext());
+
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
-            startSignedInActivity(null);
+            //FUTURE USE--------------------------->
+//            startSignedInActivity(null);
+            //FUTURE USE--------------------------->
             finish();
             return;
         }
@@ -88,13 +109,40 @@ public class FirebaseActivity extends AppActivity {
 
     @MainThread
     private void handleSignInResponse(int resultCode, Intent data) {
-        IdpResponse response = IdpResponse.fromResultIntent(data);
+        response = IdpResponse.fromResultIntent(data);
 
         // Successfully signed in
         if (resultCode == RESULT_OK) {
-            startSignedInActivity(response);
-            finish();
-            return;
+
+            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (currentUser != null) {
+                FirebaseLoginRequest firebaseLoginRequest = new FirebaseLoginRequest();
+                firebaseLoginRequest.setEmail(currentUser.getEmail());
+                firebaseLoginRequest.setName(currentUser.getDisplayName());
+                firebaseLoginRequest.setProvider_id(currentUser.getUid());
+
+                StringBuilder providerList = new StringBuilder(100);
+                Iterator<String> providerIter = currentUser.getProviders().iterator();
+                while (providerIter.hasNext()) {
+                    String provider = providerIter.next();
+                    if (GoogleAuthProvider.PROVIDER_ID.equals(provider)) {
+                        firebaseLoginRequest.setProvider("google");
+                    } else if (FacebookAuthProvider.PROVIDER_ID.equals(provider)) {
+                        firebaseLoginRequest.setProvider("facebook");
+                    } else if (EmailAuthProvider.PROVIDER_ID.equals(provider)) {
+                        firebaseLoginRequest.setProvider("firebase-email");
+                    } else {
+                        firebaseLoginRequest.setProvider(provider);
+                    }
+                }
+
+                firebaseLoginRequest.setToken(response.getIdpToken());
+                firebaseLoginRequest.setSecret(response.getIdpSecret());
+
+                CommunicationManager.getInstance().postFirebaseLoginDetails(firebaseLoginRequest,mActivity);
+
+            }
+
         } else {
             // Sign in failed
             if (response == null) {
@@ -113,11 +161,11 @@ public class FirebaseActivity extends AppActivity {
                 return;
             }
         }
-        showSnackbar(R.string.unknown_sign_in_response);
+//        showSnackbar(R.string.unknown_sign_in_response);
     }
 
-
-    private void startSignedInActivity(IdpResponse response) {
+//FUTURE USE--------------------------->
+/*    private void startSignedInActivity(IdpResponse response) {
         startActivity(
                 UserProfileActivity.createIntent(
                         this,
@@ -129,7 +177,9 @@ public class FirebaseActivity extends AppActivity {
                                 getSelectedTosUrl(),
                                 false,
                                 false)));
-    }
+    }*/
+//FUTURE USE--------------------------->
+
 
     @MainThread
     @StyleRes
@@ -239,5 +289,18 @@ public class FirebaseActivity extends AppActivity {
     @MainThread
     private void showSnackbar(@StringRes int errorMessageRes) {
         Snackbar.make(mRootView, errorMessageRes, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onFirebaseLoginCompleted(FirebaseLoginAPIResponse firebaseLoginAPIResponse) {
+
+        if (firebaseLoginAPIResponse.isSuccess()){
+
+            sessionManager.createLoginSession(firebaseLoginAPIResponse.getFirebaseUser());
+            finish();
+            return;
+        }else {
+            ToastUtil.showCenterToast(getApplicationContext(),firebaseLoginAPIResponse.getMessage());
+        }
     }
 }

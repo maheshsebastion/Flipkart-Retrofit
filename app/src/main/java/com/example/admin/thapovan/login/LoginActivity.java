@@ -51,6 +51,7 @@ public class LoginActivity extends AppActivity implements LoginEventSubscriber {
     public void onFireBaseBtnClicked(){
         Intent intent = new Intent(getApplicationContext(),FirebaseActivity.class);
         startActivity(intent);
+        finish();
     }
 
     //Onclick for REGISTER BUTTON

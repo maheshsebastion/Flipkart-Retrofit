@@ -1,10 +1,12 @@
 package com.example.admin.thapovan.api.remote;
 
+import com.example.admin.thapovan.api.response.FirebaseLoginAPIResponse;
 import com.example.admin.thapovan.api.response.LoginAPIResponse;
 import com.example.admin.thapovan.api.response.ProductAPIResponse;
 import com.example.admin.thapovan.api.response.RegisterAPIResponse;
 import com.example.admin.thapovan.api.response.SettingsAPIResponse;
 import com.example.admin.thapovan.api.util.APIUtil;
+import com.example.admin.thapovan.request.FirebaseLoginRequest;
 import com.example.admin.thapovan.request.LoginRequest;
 import com.example.admin.thapovan.request.RegistrationRequest;
 
@@ -40,4 +42,7 @@ public interface APIInterface {
 
     @POST(APIUtil.API_REGISTER)
     Call<RegisterAPIResponse> postRegisterDetails(@Body RegistrationRequest registrationRequest);
+
+    @POST(APIUtil.API_FIREBASE_LOGIN)
+    Call<FirebaseLoginAPIResponse> postFirebaseLoginDetails(@Body FirebaseLoginRequest firebaseLoginRequest);
 }

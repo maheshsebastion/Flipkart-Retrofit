@@ -24,6 +24,7 @@ public class APIUtil {
     public static final String API_SETTINGS = "/projects/learning/laravel/e-commerce-portal/api/v1/getSettings";
     public static final String API_LOGIN = "/projects/learning/laravel/e-commerce-portal/api/v1/login";
     public static final String API_REGISTER= "/projects/learning/laravel/e-commerce-portal/api/v1/registration";
+    public static final String API_FIREBASE_LOGIN= "/projects/learning/laravel/e-commerce-portal/api/v1/loginSocial";
 
 
     public static APIInterface getAPI(){
