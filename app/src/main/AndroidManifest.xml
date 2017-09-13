@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.admin.flipkart">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.admin.thapovan">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -16,22 +17,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.SplashScreenActivity">
+
+        <activity android:name="com.example.admin.thapovan.activity.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity" />
-        <activity android:name=".product.activity.ProductActivity" />
-        <activity android:name=".product.activity.ProductDescriptionActivity" />
-        <activity android:name=".category.activity.AllCategoryActivity" />
-        <activity android:name=".brand.activity.BrandActivity" />
+        <activity android:name="com.example.admin.thapovan.activity.MainActivity" />
+        <activity android:name="com.example.admin.thapovan.product.activity.ProductActivity" />
+        <activity android:name="com.example.admin.thapovan.product.activity.ProductDescriptionActivity" />
+        <activity android:name="com.example.admin.thapovan.category.activity.AllCategoryActivity" />
+        <activity android:name="com.example.admin.thapovan.brand.activity.BrandActivity" />
         <activity
-            android:name=".login.LoginActivity"
+            android:name="com.example.admin.thapovan.login.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".login.RegisterActivity" />
+        <activity android:name="com.example.admin.thapovan.login.RegisterActivity" />
+
+
+        <meta-data
+            tools:replace="android:value"
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_application_id" />
+
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider117409598925079"
+            android:exported="true" />
+
+        <activity android:name="com.example.admin.thapovan.firebase.FirebaseActivity" />
+        <activity android:name="com.example.admin.thapovan.firebase.UserProfileActivity" />
     </application>
 
 </manifest>
