@@ -8,6 +8,7 @@
     <string name="category">All Categories</string>
     <string name="product">Electronics</string>
     <string name="main">Flipkart</string>
+    <string name="cart">My Cart</string>
 
     <!--string for load until API getProducts connected-->
     <string name="label_loading">Loading...</string>

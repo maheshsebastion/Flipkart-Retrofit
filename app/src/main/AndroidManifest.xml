@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.admin.thapovan">
+    package="com.example.admin.flipkart">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -17,37 +17,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name="com.example.admin.thapovan.activity.SplashScreenActivity">
+        <activity android:name="com.example.admin.flipkart.home.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.admin.thapovan.activity.MainActivity" />
-        <activity android:name="com.example.admin.thapovan.product.activity.ProductActivity" />
-        <activity android:name="com.example.admin.thapovan.product.activity.ProductDescriptionActivity" />
-        <activity android:name="com.example.admin.thapovan.category.activity.AllCategoryActivity" />
-        <activity android:name="com.example.admin.thapovan.brand.activity.BrandActivity" />
+        <activity android:name="com.example.admin.flipkart.home.MainActivity" />
+        <activity android:name="com.example.admin.flipkart.product.activity.ProductActivity" />
+        <activity android:name="com.example.admin.flipkart.product.activity.ProductDescriptionActivity" />
+        <activity android:name="com.example.admin.flipkart.category.activity.AllCategoryActivity" />
+        <activity android:name="com.example.admin.flipkart.brand.activity.BrandActivity" />
         <activity
-            android:name="com.example.admin.thapovan.login.LoginActivity"
+            android:name="com.example.admin.flipkart.login.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name="com.example.admin.thapovan.login.RegisterActivity" />
-
+        <activity android:name="com.example.admin.flipkart.login.RegisterActivity" />
 
         <meta-data
-            tools:replace="android:value"
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_application_id" />
+            android:value="@string/facebook_application_id"
+            tools:replace="android:value" />
 
         <provider
             android:name="com.facebook.FacebookContentProvider"
             android:authorities="com.facebook.app.FacebookContentProvider117409598925079"
             android:exported="true" />
 
-        <activity android:name="com.example.admin.thapovan.firebase.FirebaseActivity" />
-        <activity android:name="com.example.admin.thapovan.firebase.UserProfileActivity" />
+        <activity android:name="com.example.admin.flipkart.firebase.FirebaseActivity" />
+        <activity android:name="com.example.admin.flipkart.firebase.UserProfileActivity" />
+        <activity android:name="com.example.admin.flipkart.cart.activity.CartActivity"></activity>
     </application>
 
 </manifest>
