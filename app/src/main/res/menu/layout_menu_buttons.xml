@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MyHome">
     <item
+        android:id="@+id/wishlist"
+        android:icon="@drawable/wishlist"
+        android:title=""
+        app:showAsAction="always">
+
+    </item>
+    <item
         android:id="@+id/notification"
         android:icon="@drawable/notification"
         android:title=""

@@ -9,6 +9,7 @@
     <string name="product">Electronics</string>
     <string name="main">Flipkart</string>
     <string name="cart">My Cart</string>
+    <string name="wishlist">My Wishlist</string>
 
     <!--string for load until API getProducts connected-->
     <string name="label_loading">Loading...</string>
@@ -29,6 +30,8 @@
     <string name="title_activity_login">Sign in</string>
     <string name="buynow">BUY NOW</string>
     <string name="addtocart">ADD TO CART</string>
+    <string name="wishlistBtn">Move to wishlist</string>
+    <string name="removeCart">Remove</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -60,5 +63,15 @@
     <string name="sign_out_failed">Sign out failed</string>
     <string name="delete_account_failed">Delete account failed</string>
 
-
+    <!--Spinner values-->
+    <string-array name="quantity_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>more</item>
+    </string-array>
 </resources>
