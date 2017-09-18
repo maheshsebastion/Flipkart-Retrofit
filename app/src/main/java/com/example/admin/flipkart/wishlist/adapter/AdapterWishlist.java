@@ -14,6 +14,7 @@ import com.example.admin.flipkart.R;
 import com.example.admin.flipkart.models.Products;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +26,7 @@ import butterknife.ButterKnife;
 public class AdapterWishlist extends RecyclerView.Adapter<AdapterWishlist.MyHolder>{
 
 
-    private ArrayList<Products> list = new ArrayList<Products>();
+    ArrayList<Products> list = new ArrayList<Products>();
     Context mContext;
 
     MyWishlistClickListener wishlistClickListener;
@@ -71,7 +72,7 @@ public class AdapterWishlist extends RecyclerView.Adapter<AdapterWishlist.MyHold
         @BindView(R.id.priceWishlist)           TextView price;
         @BindView(R.id.productimageWishlist)    ImageView image;
 
-        @BindView(R.id.removefromWishlist)      TextView removeWishlist;
+        @BindView(R.id.removefromWishlist)      ImageView removeWishlist;
         @BindView(R.id.card_view_wishlist)      CardView cartCardView;
 
 

@@ -1,25 +1,22 @@
 package com.example.admin.flipkart.wishlist.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.example.admin.flipkart.R;
-import com.example.admin.flipkart.api.request.wishlist.WishlistAddRequest;
 import com.example.admin.flipkart.api.request.wishlist.WishlistRemoveRequest;
-import com.example.admin.flipkart.api.response.wishlist.WishlistAddAPIResponse;
-import com.example.admin.flipkart.api.response.wishlist.WishlistGetAPIResponse;
-import com.example.admin.flipkart.api.response.wishlist.WishlistRemoveAPIResponse;
+import com.example.admin.flipkart.api.response.wishlist.WishlistAddPostResponse;
+import com.example.admin.flipkart.api.response.wishlist.WishlistGetResponse;
+import com.example.admin.flipkart.api.response.wishlist.WishlistRemovePostResponse;
 import com.example.admin.flipkart.api.subscriber.WishlistEventSubscriber;
 import com.example.admin.flipkart.api.util.CommunicationManager;
 import com.example.admin.flipkart.app.AppActivity;
-import com.example.admin.flipkart.cart.activity.CartActivity;
 import com.example.admin.flipkart.login.SessionManager;
 import com.example.admin.flipkart.models.Products;
 import com.example.admin.flipkart.models.User;
@@ -29,6 +26,7 @@ import com.google.gson.Gson;
 import com.thapovan.android.commonutils.toast.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -79,8 +77,8 @@ public class WishlistActivity extends AppActivity implements WishlistEventSubscr
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(true);
         }
-        wishList = new ArrayList<>();
 
+        wishList= new ArrayList<>();
         adapterWishlist = new AdapterWishlist(mActivity, wishList, new AdapterWishlist.MyWishlistClickListener() {
 
             @Override
@@ -134,38 +132,40 @@ public class WishlistActivity extends AppActivity implements WishlistEventSubscr
 
     //Wishlist
     @Override
-    public void onWishlistGetCompleted(WishlistGetAPIResponse wishlistGetAPIResponse) {
+    public void onWishlistGetCompleted(WishlistGetResponse wishlistGetResponse) {
         hideProgress();
 
-        if (wishlistGetAPIResponse.isSuccess()){
+        if (wishlistGetResponse.isSuccess()){
 
-            wishList.addAll(wishlistGetAPIResponse.getProducts());
+            Log.i("TAG","Hi.........");
+
+            wishList.addAll(wishlistGetResponse.getProducts());
             adapterWishlist.notifyDataSetChanged();
 
-            ToastUtil.showCenterToast(getApplicationContext(), wishlistGetAPIResponse.getMessage());
+            ToastUtil.showCenterToast(getApplicationContext(), wishlistGetResponse.getMessage());
         }else {
 
-            ToastUtil.showCenterToast(getApplicationContext(), wishlistGetAPIResponse.getMessage());
+            ToastUtil.showCenterToast(getApplicationContext(), wishlistGetResponse.getMessage());
         }
     }
 
     @Override
-    public void onWishlistAddCompleted(WishlistAddAPIResponse wishlistAddAPIResponse) {
+    public void onWishlistAddCompleted(WishlistAddPostResponse wishlistAddPostResponse) {
 
     }
 
     @Override
-    public void onWishlistRemoveCompleted(WishlistRemoveAPIResponse wishlistRemoveAPIResponse) {
+    public void onWishlistRemoveCompleted(WishlistRemovePostResponse wishlistRemovePostResponse) {
         hideProgress();
 
-        if (wishlistRemoveAPIResponse.isSuccess()){
+        if (wishlistRemovePostResponse.isSuccess()){
 
             wishList.remove(removedProductPosition);
             adapterWishlist.notifyDataSetChanged();
-            ToastUtil.showCenterToast(getApplicationContext(), wishlistRemoveAPIResponse.getMessage());
+            ToastUtil.showCenterToast(getApplicationContext(), wishlistRemovePostResponse.getMessage());
         }else {
 
-            ToastUtil.showCenterToast(getApplicationContext(), wishlistRemoveAPIResponse.getMessage());
+            ToastUtil.showCenterToast(getApplicationContext(), wishlistRemovePostResponse.getMessage());
         }
 
     }
