@@ -44,8 +44,7 @@
             android:authorities="com.facebook.app.FacebookContentProvider117409598925079"
             android:exported="true" />
 
-        <activity android:name=".firebase.FirebaseActivity" />
-        <activity android:name=".firebase.UserProfileActivity" />
+        <activity android:name=".login.UserProfileActivity" />
         <activity android:name=".cart.activity.CartActivity" />
         <activity android:name=".wishlist.activity.WishlistActivity"></activity>
     </application>
